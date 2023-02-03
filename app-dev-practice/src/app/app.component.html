@@ -1,10 +1,11 @@
+<meta charset="utf-8">
 <div id="wrapper">
   <br>
-<h1>Great Shows!</h1>
+<h1>{{title}} 	&#x1f4fa;</h1>
 <body>
   <img class=image src="https://media2.giphy.com/media/Sb7WSbjHFNIL6/giphy.gif" alt="Spongebob" width="350" height="275">
   <br>
-<table>
+<table id='tv-series-table'>
   <tr>
     <th>TV Show</th>
     <th>Streaming Platform</th>
@@ -26,6 +27,11 @@
     <td>Drama</td>
   </tr>
   <tr>
+    <td>Rick & Morty</td>
+    <td>HBO</td>
+    <td>Comedy</td>
+  </tr>
+  <tr>
     <td>American Horror Story</td>
     <td>Hulu</td>
     <td>Horror</td>
@@ -43,9 +49,9 @@
 </table>
 <br>
 <div id="button-container">
-  <button id="delete">Delete Show</button>
+  <button id="delete" (click)="deleteShow('tv-series-table')">Delete Show</button>
   &nbsp;
-  <button id="add">Add Show</button>
+  <button id="add" (click)="addShow('tv-series-table')">Add Show</button>
 </div>
 <br>
 <img class=image src="https://images7.alphacoders.com/329/329976.jpg" alt="The Walking Dead" width="1000" height="600">
