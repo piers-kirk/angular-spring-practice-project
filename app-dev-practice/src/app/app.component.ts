@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-  title = 'TV Shows';
+  public title: string = "Piers' Application";
+  public pageTitle: string = 'TV Shows';
+
+  constructor(private titleService: Title) {}
+
+  ngOnInit() {
+    this.titleService.setTitle(this.title);
+  }
 
   public addShow(tableId: string) {
     let tableRef = <HTMLTableElement>document.getElementById(tableId);
