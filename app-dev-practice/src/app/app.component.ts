@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
   public title: string = "Piers' Application";
-  public pageTitle: string = 'TV Shows';
+  public pageTitle: string = 'Welcome!';
 
   constructor(private titleService: Title) {}
 

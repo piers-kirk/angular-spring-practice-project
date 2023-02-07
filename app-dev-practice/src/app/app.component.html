@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <div id="wrapper">
+  <div id="application-background">
     <br />
     <h1>
       {{ pageTitle }}
     </h1>
+
     <body>
+      <div id="menu-buttons">
+        <button>Home</button>
+        <button>News</button>
+        <button>Contact</button>
+        <button>About</button>
+      </div>
+      <br />
       <img
         class="image"
         src="https://media2.giphy.com/media/Sb7WSbjHFNIL6/giphy.gif"
         alt="Spongebob"
-        width="350"
-        height="275"
+        width="20%"
+        height="30%"
       />
       <br />
       <table id="tv-series-table">
@@ -58,20 +66,34 @@
         </tr>
       </table>
       <br />
+      <form>
+        <input type="text" name="tvShow" placeholder="TV Show" />
+        &nbsp;
+        <input
+          type="text"
+          name="streamingPlatform"
+          placeholder="Streaming Platform"
+        />
+        &nbsp;
+        <input type="text" name="genre" placeholder="Genre" />
+      </form>
+      <br />
       <div id="button-container">
-        <button id="delete" (click)="deleteShow('tv-series-table')">
+        <button id="delete-button" (click)="deleteShow('tv-series-table')">
           Delete Show
         </button>
         &nbsp;
-        <button id="add" (click)="addShow('tv-series-table')">Add Show</button>
+        <button id="add-button" (click)="addShow('tv-series-table')">
+          Add Show
+        </button>
       </div>
       <br />
       <img
         class="image"
         src="https://images7.alphacoders.com/329/329976.jpg"
         alt="The Walking Dead"
-        width="1000"
-        height="600"
+        width="70%"
+        height="50%"
       />
     </body>
   </div>
