@@ -66,27 +66,34 @@
         </tr>
       </table>
       <br />
-      <form>
-        <input type="text" name="tvShow" placeholder="TV Show" />
-        &nbsp;
-        <input
-          type="text"
-          name="streamingPlatform"
-          placeholder="Streaming Platform"
-        />
-        &nbsp;
-        <input type="text" name="genre" placeholder="Genre" />
+
+      <form [formGroup]="tvShowForm" (ngSubmit)="onSubmit('tv-series-table')">
+        <div class="input-container">
+          <input type="text" placeholder="TV Show" formControlName="tvShow" />
+        </div>
+
+        <div class="input-container">
+          <input
+            type="text"
+            placeholder="Streaming Platform"
+            formControlName="streamingPlatform"
+          />
+        </div>
+
+        <div class="input-container">
+          <input type="text" placeholder="Genre" formControlName="genre" />
+        </div>
+        <br />
+
+        <div id="button-container">
+          <button id="delete-button" (click)="deleteShow('tv-series-table')">
+            Delete Show
+          </button>
+          &nbsp;
+          <button id="add-button" type="submit()">Add Show</button>
+        </div>
       </form>
-      <br />
-      <div id="button-container">
-        <button id="delete-button" (click)="deleteShow('tv-series-table')">
-          Delete Show
-        </button>
-        &nbsp;
-        <button id="add-button" (click)="addShow('tv-series-table')">
-          Add Show
-        </button>
-      </div>
+
       <br />
       <img
         class="image"
