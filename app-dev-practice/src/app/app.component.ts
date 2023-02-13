@@ -24,29 +24,36 @@ export class AppComponent {
   }
 
   onSubmit(tableId: string): void {
-    let tableRef = <HTMLTableElement>document.getElementById(tableId);
+    let tBody = document.querySelector('tbody');
+    const tr = document.querySelectorAll('tr');
     if (
-      tableRef !== null &&
+      tBody != null &&
+      tr != null &&
       this.tvShowForm.value.tvShow != null &&
       this.tvShowForm.value.streamingPlatform != null &&
       this.tvShowForm.value.genre != null
     ) {
-      const newRow = tableRef.insertRow(-1);
+      let newRow = tBody.appendChild(tr[1].cloneNode(true));
 
-      let showNameCell = newRow.insertCell(0);
-      const showName = document.createTextNode(this.tvShowForm.value.tvShow);
-      showNameCell.appendChild(showName);
-
-      let streamingPlatformCell = newRow.insertCell(1);
-      const streamingPlatform = document.createTextNode(
-        this.tvShowForm.value.streamingPlatform
-      );
-      streamingPlatformCell.appendChild(streamingPlatform);
-
-      let genreCell = newRow.insertCell(2);
-      const genre = document.createTextNode(this.tvShowForm.value.genre);
-      genreCell.appendChild(genre);
+      for (
+        let i = 0;
+        i < newRow.childNodes.length && newRow.childNodes[i] != null;
+        i++
+      ) {
+        switch (i) {
+          case 0:
+            newRow.childNodes[i].textContent = this.tvShowForm.value.tvShow;
+            break;
+          case 1:
+            newRow.childNodes[i].textContent =
+              this.tvShowForm.value.streamingPlatform;
+            break;
+          default:
+            newRow.childNodes[i].textContent = this.tvShowForm.value.genre;
+        }
+      }
     }
+    this.tvShowForm.reset();
   }
 
   public deleteShow(tableId: string) {

@@ -24,52 +24,61 @@
       />
       <br />
       <table id="tv-series-table">
-        <tr>
-          <th>TV Show</th>
-          <th>Streaming Platform</th>
-          <th>Genre</th>
-        </tr>
-        <tr>
-          <td>The Walking Dead</td>
-          <td>Netflix</td>
-          <td>Drama</td>
-        </tr>
-        <tr>
-          <td>Breaking Bad</td>
-          <td>Netflix</td>
-          <td>Drama</td>
-        </tr>
-        <tr>
-          <td>Euphoria</td>
-          <td>HBO</td>
-          <td>Drama</td>
-        </tr>
-        <tr>
-          <td>Rick & Morty</td>
-          <td>HBO</td>
-          <td>Comedy</td>
-        </tr>
-        <tr>
-          <td>American Horror Story</td>
-          <td>Hulu</td>
-          <td>Horror</td>
-        </tr>
-        <tr>
-          <td>Spongebob</td>
-          <td>Amazon Prime</td>
-          <td>Family</td>
-        </tr>
-        <tr>
-          <td>Fresh Meat</td>
-          <td>Amazon Prime</td>
-          <td>Comedy</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>TV Show</th>
+            <th>Streaming Platform</th>
+            <th>Genre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Walking Dead</td>
+            <td>Netflix</td>
+            <td>Drama</td>
+          </tr>
+          <tr>
+            <td>Breaking Bad</td>
+            <td>Netflix</td>
+            <td>Drama</td>
+          </tr>
+          <tr>
+            <td>Euphoria</td>
+            <td>HBO</td>
+            <td>Drama</td>
+          </tr>
+          <tr>
+            <td>Rick & Morty</td>
+            <td>HBO</td>
+            <td>Comedy</td>
+          </tr>
+          <tr>
+            <td>American Horror Story</td>
+            <td>Hulu</td>
+            <td>Horror</td>
+          </tr>
+          <tr>
+            <td>Spongebob</td>
+            <td>Amazon Prime</td>
+            <td>Family</td>
+          </tr>
+          <tr>
+            <td>Fresh Meat</td>
+            <td>Amazon Prime</td>
+            <td>Comedy</td>
+          </tr>
+        </tbody>
       </table>
       <br />
 
       <form [formGroup]="tvShowForm" (ngSubmit)="onSubmit('tv-series-table')">
         <div class="input-container">
-          <input type="text" placeholder="TV Show" formControlName="tvShow" />
+          <input
+            type="text"
+            placeholder="TV Show"
+            formControlName="tvShow"
+            maxlength="10"
+          />
         </div>
 
         <div class="input-container">
@@ -77,11 +86,17 @@
             type="text"
             placeholder="Streaming Platform"
             formControlName="streamingPlatform"
+            maxlength="10"
           />
         </div>
 
         <div class="input-container">
-          <input type="text" placeholder="Genre" formControlName="genre" />
+          <input
+            type="text"
+            placeholder="Genre"
+            formControlName="genre"
+            maxlength="10"
+          />
         </div>
         <br />
 
