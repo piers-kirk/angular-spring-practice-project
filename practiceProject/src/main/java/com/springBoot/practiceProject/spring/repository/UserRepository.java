@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.springBoot.practiceProject.form.UserForm;
 import com.springBoot.practiceProject.spring.model.User;
 import com.springBoot.practiceProject.spring.model.UserRowMapper;
 
 @Repository
-public class UserRepository implements ObjectRepository<User> {
+public class UserRepository implements ObjectRepository<User, UserForm> {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -19,7 +20,7 @@ public class UserRepository implements ObjectRepository<User> {
 	private UserRowMapper userRowMapper; 
 	
 	@Override
-	public void store(User t) {
+	public void store(UserForm t) {
 		// TODO Auto-generated method stub
 		
 	}

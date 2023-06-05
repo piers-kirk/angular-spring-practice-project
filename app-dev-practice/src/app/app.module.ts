@@ -7,9 +7,10 @@ import { UserComponent } from './user/user.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { ShowComponent } from './show/show.component';
 
 @NgModule({
-  declarations: [AppComponent, UserComponent],
+  declarations: [AppComponent, UserComponent, ShowComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User> {
-    const url = 'http://localhost:8080/api/users';
+    const url = 'http://localhost:8080/users/getAll';
 
     return this.http.get<User>(url);
   }

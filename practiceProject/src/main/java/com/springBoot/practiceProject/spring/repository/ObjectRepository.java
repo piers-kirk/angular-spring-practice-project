@@ -1,8 +1,8 @@
 package com.springBoot.practiceProject.spring.repository;
 
-public interface ObjectRepository<T> {
+public interface ObjectRepository<T, K> {
 
-	public void store(T t);
+	public void store(K t);
 
 	public T retrieve(long id);
 
