@@ -1,13 +1,15 @@
 package com.springBoot.practiceProject.spring.repository;
 
-public interface ObjectRepository<T, K> {
+import java.util.List;
 
-	public void store(K t);
+public interface ObjectRepository<Model, Form> {
 
-	public T retrieve(long id);
+	public Model get(long id);
 
-	public T search(String name);
-
-	public T delete(long id);
+	public List<Model> getAll();
 	
+	public int save(Form t);
+
+	public Model delete(long id);
+
 }

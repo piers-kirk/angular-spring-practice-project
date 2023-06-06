@@ -13,15 +13,15 @@ import com.springBoot.practiceProject.spring.repository.UserRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("users/")
+@RequestMapping("user/")
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@GetMapping("getAll")
 	public List<User> getUsers() {
 		return this.userRepository.getAll();
 	}
-	
+
 }

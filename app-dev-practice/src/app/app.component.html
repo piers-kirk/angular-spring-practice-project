@@ -1,128 +1,14 @@
 <!DOCTYPE html>
 <html>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <div id="application-background">
+  <div id="screen">
     <br />
-    <app-user></app-user>
-    <app-show></app-show>
     <h1>
       {{ pageTitle }}
     </h1>
-
-    <body>
-      <div id="menu-buttons">
-        <button onclick="location.href='https://www.imdb.com/'" type="button">
-          IMDB
-        </button>
-        <button
-          onclick="location.href='https://www.netflix.com/'"
-          type="button"
-        >
-          Netflix
-        </button>
-        <button onclick="location.href='https://www.hbo.com/'" type="button">
-          HBO
-        </button>
-      </div>
-      <br />
-      <img
-        class="image"
-        src="https://media2.giphy.com/media/Sb7WSbjHFNIL6/giphy.gif"
-        alt="Spongebob"
-        width="20%"
-        height="30%"
-      />
-      <br />
-      <button id="delete-button" (click)="deleteShow('tv-series-table')">
-        Delete Show
-      </button>
-      <br />
-      <table id="tv-series-table">
-        <thead>
-          <tr>
-            <th>TV Show</th>
-            <th>Streaming Platform</th>
-            <th>Genre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>The Walking Dead</td>
-            <td>Netflix</td>
-            <td>Drama</td>
-          </tr>
-          <tr>
-            <td>Breaking Bad</td>
-            <td>Netflix</td>
-            <td>Drama</td>
-          </tr>
-          <tr>
-            <td>Euphoria</td>
-            <td>HBO</td>
-            <td>Drama</td>
-          </tr>
-          <tr>
-            <td>Rick & Morty</td>
-            <td>HBO</td>
-            <td>Comedy</td>
-          </tr>
-          <tr>
-            <td>American Horror Story</td>
-            <td>Hulu</td>
-            <td>Horror</td>
-          </tr>
-          <tr>
-            <td>Spongebob</td>
-            <td>Amazon Prime</td>
-            <td>Family</td>
-          </tr>
-          <tr>
-            <td>Fresh Meat</td>
-            <td>Amazon Prime</td>
-            <td>Comedy</td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-
-      <form [formGroup]="tvShowForm" (ngSubmit)="onSubmit('tv-series-table')">
-        <div class="input-container">
-          <input
-            type="text"
-            placeholder="TV Show"
-            formControlName="tvShow"
-            maxlength="30"
-          />
-        </div>
-
-        <div class="input-container">
-          <input
-            type="text"
-            placeholder="Streaming Platform"
-            formControlName="streamingPlatform"
-            maxlength="30"
-          />
-        </div>
-
-        <div class="input-container">
-          <input
-            type="text"
-            placeholder="Genre"
-            formControlName="genre"
-            maxlength="30"
-          />
-        </div>
-        <br />
-        <button id="add-button" type="submit()">Add Show</button>
-      </form>
-      <br />
-      <img
-        class="image"
-        src="https://images7.alphacoders.com/329/329976.jpg"
-        alt="The Walking Dead"
-        width="70%"
-        height="50%"
-      />
+    <app-menu></app-menu>
+    <body id="application-background">
+      <app-show></app-show>
     </body>
   </div>
 </html>

@@ -8,9 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowComponent } from './show/show.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent, UserComponent, ShowComponent],
+  declarations: [AppComponent, UserComponent, ShowComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

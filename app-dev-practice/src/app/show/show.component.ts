@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ShowService } from './show.service';
+import { FormBuilder } from '@angular/forms';
+import { Show } from './show.interface';
 
 @Component({
   selector: 'app-show',
@@ -7,16 +9,38 @@ import { ShowService } from './show.service';
   styleUrls: ['./show.component.sass'],
 })
 export class ShowComponent {
-  constructor(private showService: ShowService) {}
-  getShows(event: any) {
+  constructor(
+    private showService: ShowService,
+    private formBuilder: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.getShows();
+  }
+
+  showForm = this.formBuilder.group({
+    showName: null,
+    streamingPlatform: null,
+    genre: null,
+  });
+
+  shows: Show[];
+  stateObj: any;
+
+  getShows(): void {
     this.showService.getShows().subscribe((shows) => {
-      console.log(shows);
+      this.shows = shows;
     });
   }
 
-  save(event: any) {
-    this.showService.getShows().subscribe((shows) => {
-      console.log(shows);
+  public addShow() {
+    this.showService.save(this.showForm.getRawValue()).subscribe(() => {
+      next: console.log('yay!');
+      error: console.log('error');
     });
+  }
+
+  public deleteShow() {
+    console.log(this.showForm);
   }
 }

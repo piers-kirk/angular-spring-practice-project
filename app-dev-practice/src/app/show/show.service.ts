@@ -9,13 +9,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class ShowService {
   constructor(private http: HttpClient) {}
 
-  getShows(): Observable<Show> {
-    const url = 'http://localhost:8080/shows/getAll';
-    return this.http.get<Show>(url);
+  getShows(): Observable<Show[]> {
+    const url = 'http://localhost:8080/show/getAll';
+    return this.http.get<Show[]>(url);
   }
 
-  save(show: Show) {
-    const url = 'http://localhost:8080/shows/save';
+  save(show: any) {
+    const url = 'http://localhost:8080/show/save';
     return this.http.post<Show>(url, show);
   }
 }

@@ -15,36 +15,32 @@ public class UserRepository implements ObjectRepository<User, UserForm> {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired 
-	private UserRowMapper userRowMapper; 
-	
-	@Override
-	public void store(UserForm t) {
-		// TODO Auto-generated method stub
-		
-	}
+
+	@Autowired
+	private UserRowMapper userRowMapper;
 
 	@Override
-	public User retrieve(long id) {
+	public User get(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public User search(String name) {
-		return null;
-	}
-	
-	@Override
-	public User delete(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public List<User> getAll() {
 		String sql = "SELECT * FROM [IMDB_DB].[dbo].[Persons]";
 		List<User> employees = jdbcTemplate.query(sql, userRowMapper);
 		return employees;
 	}
+	
+	@Override
+	public int save(UserForm t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public User delete(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
