@@ -25,6 +25,7 @@ public class UserRepository implements ObjectRepository<User, UserForm> {
 		return null;
 	}
 
+	@Override 
 	public List<User> getAll() {
 		String sql = "SELECT * FROM [IMDB_DB].[dbo].[Persons]";
 		List<User> employees = jdbcTemplate.query(sql, userRowMapper);

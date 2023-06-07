@@ -25,6 +25,7 @@ public class ShowRepository implements ObjectRepository<Show, ShowForm> {
 		return null;
 	}
 
+	@Override 
 	public List<Show> getAll() {
 		String sql = "SELECT * FROM [IMDB_DB].[dbo].[Shows]";
 		List<Show> shows = jdbcTemplate.query(sql, showRowMapper);

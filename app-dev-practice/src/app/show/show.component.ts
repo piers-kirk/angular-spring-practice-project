@@ -35,7 +35,7 @@ export class ShowComponent {
 
   public addShow() {
     this.showService.save(this.showForm.getRawValue()).subscribe(() => {
-      next: console.log('yay!');
+      next: location.reload();
       error: console.log('error');
     });
   }
