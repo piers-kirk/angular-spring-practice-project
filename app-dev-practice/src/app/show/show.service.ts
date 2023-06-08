@@ -10,7 +10,7 @@ export class ShowService {
   constructor(private http: HttpClient) {}
 
   getShows(): Observable<Show[]> {
-    const url = 'http://localhost:8080/show/getAll';
+    const url = 'http://localhost:8080/show/selectAll';
     return this.http.get<Show[]>(url);
   }
 

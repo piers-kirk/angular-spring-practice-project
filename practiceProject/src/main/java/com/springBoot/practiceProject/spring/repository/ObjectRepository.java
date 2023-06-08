@@ -2,14 +2,24 @@ package com.springBoot.practiceProject.spring.repository;
 
 import java.util.List;
 
-public interface ObjectRepository<Model, Form> {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Repository;
 
-	public Model get(long id);
+@Repository
+public abstract class ObjectRepository<Model, Form> {
 
-	public List<Model> getAll();
+	@Autowired
+	protected Environment env;
+		
+	public abstract Model select(long id);
+
+	public abstract List<Model> selectAll();
 	
-	public int save(Form t);
+	public abstract int insert(Form t);
+	
+	public abstract int update(Form t);
 
-	public Model delete(long id);
+	public abstract Model delete(long id);
 
 }

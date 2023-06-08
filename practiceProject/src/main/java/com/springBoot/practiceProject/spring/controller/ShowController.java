@@ -22,14 +22,14 @@ public class ShowController {
 	@Autowired
 	private ShowRepository showRepository;
 
-	@GetMapping("getAll")
+	@GetMapping("selectAll")
 	public List<Show> getShows() {
-		return this.showRepository.getAll();
+		return this.showRepository.selectAll();
 	}
 
 	@PostMapping("save")
 	public void saveShow(@RequestBody ShowForm showForm) {
-		this.showRepository.save(showForm);
+		this.showRepository.insert(showForm);
 	}
 
 }

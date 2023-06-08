@@ -11,7 +11,7 @@ import com.springBoot.practiceProject.spring.model.Show;
 import com.springBoot.practiceProject.spring.model.ShowRowMapper;
 
 @Repository
-public class ShowRepository implements ObjectRepository<Show, ShowForm> {
+public class ShowRepository extends ObjectRepository<Show, ShowForm> {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -20,23 +20,28 @@ public class ShowRepository implements ObjectRepository<Show, ShowForm> {
 	private ShowRowMapper showRowMapper;
 
 	@Override
-	public Show get(long id) {
+	public Show select(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override 
-	public List<Show> getAll() {
-		String sql = "SELECT * FROM [IMDB_DB].[dbo].[Shows]";
+	public List<Show> selectAll() {
+		String sql = env.getProperty("repository.show.query.selectAll");
 		List<Show> shows = jdbcTemplate.query(sql, showRowMapper);
 		return shows;
 	}
 	
 	@Override
-	public int save(ShowForm showForm) {
-		String sql = "INSERT INTO [IMDB_DB].[dbo].[Shows] VALUES (?, ?, ?, ?)";
-		return jdbcTemplate.update(sql,
-				new Object[] { showForm.getId(), showForm.getShowName(), showForm.getStreamingPlatform(),  showForm.getGenre() });
+	public int insert(ShowForm showForm) {
+		String sql = env.getProperty("repository.show.query.insert");
+		return jdbcTemplate.update(sql, new Object[] { showForm.getShowName(), showForm.getStreamingPlatform(),  showForm.getGenre() });
+	}
+
+	@Override
+	public int update(ShowForm t) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
