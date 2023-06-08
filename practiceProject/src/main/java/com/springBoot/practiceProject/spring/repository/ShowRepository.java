@@ -25,17 +25,18 @@ public class ShowRepository extends ObjectRepository<Show, ShowForm> {
 		return null;
 	}
 
-	@Override 
+	@Override
 	public List<Show> selectAll() {
 		String sql = env.getProperty("repository.show.query.selectAll");
 		List<Show> shows = jdbcTemplate.query(sql, showRowMapper);
 		return shows;
 	}
-	
+
 	@Override
 	public int insert(ShowForm showForm) {
 		String sql = env.getProperty("repository.show.query.insert");
-		return jdbcTemplate.update(sql, new Object[] { showForm.getShowName(), showForm.getStreamingPlatform(),  showForm.getGenre() });
+		return jdbcTemplate.update(sql,
+				new Object[] { showForm.getShowName(), showForm.getStreamingPlatform(), showForm.getGenre() });
 	}
 
 	@Override
@@ -45,9 +46,9 @@ public class ShowRepository extends ObjectRepository<Show, ShowForm> {
 	}
 
 	@Override
-	public Show delete(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public int delete(long showId) {
+		String sql = env.getProperty("repository.show.query.delete");
+		return jdbcTemplate.update(sql, new Object[] { showId });
 	}
 
 }

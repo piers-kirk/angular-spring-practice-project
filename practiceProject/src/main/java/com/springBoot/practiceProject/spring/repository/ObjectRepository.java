@@ -16,10 +16,10 @@ public abstract class ObjectRepository<Model, Form> {
 
 	public abstract List<Model> selectAll();
 	
-	public abstract int insert(Form t);
+	public abstract int insert(Form form);
 	
-	public abstract int update(Form t);
+	public abstract int update(Form form);
 
-	public abstract Model delete(long id);
+	public abstract int delete(long id);
 
 }

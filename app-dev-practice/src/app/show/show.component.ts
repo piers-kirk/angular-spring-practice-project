@@ -36,11 +36,23 @@ export class ShowComponent {
   public addShow() {
     this.showService.save(this.showForm.getRawValue()).subscribe(() => {
       next: this.getShows();
-      error: console.log('error');
+      error: (err: any) => {
+        console.log('addShow() failed: ', err);
+      };
     });
   }
 
   public deleteShow() {
-    console.log(this.showForm);
+    if (0 < this.shows.length && this.shows.at(length - 1)) {
+      const Show = this.shows.at(length - 1);
+      if (Show?.id) {
+        this.showService.delete(Show.id).subscribe(() => {
+          next: this.getShows();
+          error: (err: any) => {
+            console.log('deleteShow() failed: ', err);
+          };
+        });
+      }
+    }
   }
 }

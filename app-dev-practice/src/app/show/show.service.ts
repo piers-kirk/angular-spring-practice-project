@@ -18,4 +18,9 @@ export class ShowService {
     const url = 'http://localhost:8080/show/save';
     return this.http.post<Show>(url, show);
   }
+
+  delete(showId: any) {
+    const url = 'http://localhost:8080/show/delete';
+    return this.http.delete<Show>(url + '/' + showId);
+  }
 }
