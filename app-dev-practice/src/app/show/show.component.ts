@@ -34,11 +34,14 @@ export class ShowComponent {
   }
 
   public addShow() {
-    this.showService.save(this.showForm.getRawValue()).subscribe(() => {
-      next: this.getShows();
+    this.showService.save(this.showForm.getRawValue()).subscribe({
+      next: (data: any) => {
+        this.showForm.reset();
+        this.getShows();
+      },
       error: (err: any) => {
         console.log('addShow() failed: ', err);
-      };
+      },
     });
   }
 
@@ -46,11 +49,13 @@ export class ShowComponent {
     if (0 < this.shows.length && this.shows.at(length - 1)) {
       const Show = this.shows.at(length - 1);
       if (Show?.id) {
-        this.showService.delete(Show.id).subscribe(() => {
-          next: this.getShows();
+        this.showService.delete(Show.id).subscribe({
+          next: (data: any) => {
+            this.getShows();
+          },
           error: (err: any) => {
             console.log('deleteShow() failed: ', err);
-          };
+          },
         });
       }
     }
