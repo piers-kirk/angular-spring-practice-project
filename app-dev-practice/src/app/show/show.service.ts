@@ -9,8 +9,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class ShowService {
   constructor(private http: HttpClient) {}
 
-  getShows(): Observable<Show[]> {
-    const url = 'http://localhost:8080/show/selectAll';
+  select(): Observable<Show[]> {
+    const url = 'http://localhost:8080/show/select';
     return this.http.get<Show[]>(url);
   }
 
@@ -19,8 +19,8 @@ export class ShowService {
     return this.http.post<Show>(url, show);
   }
 
-  delete(showId: any) {
+  delete(showIds: any) {
     const url = 'http://localhost:8080/show/delete';
-    return this.http.delete<Show>(url + '/' + showId);
+    return this.http.delete<Show>(url + '/' + showIds);
   }
 }

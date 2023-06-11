@@ -24,9 +24,9 @@ public class ShowController {
 	@Autowired
 	private ShowRepository showRepository;
 
-	@GetMapping("selectAll")
-	public List<Show> getShows() {
-		return this.showRepository.selectAll();
+	@GetMapping("select")
+	public List<Show> select() {
+		return this.showRepository.select();
 	}
 
 	@PostMapping("save")
@@ -34,9 +34,9 @@ public class ShowController {
 		return this.showRepository.insert(showForm);
 	}
 
-	@DeleteMapping("delete/{showId}")
-	public int deleteShow(@PathVariable long showId) {
-		return this.showRepository.delete(showId);
+	@DeleteMapping("delete/{showIds}")
+	public int deleteShow(@PathVariable List<Long> showIds) {
+		return this.showRepository.delete(showIds);
 	}
 	
 }

@@ -3,4 +3,5 @@ export interface Show {
   showName: string;
   streamingPlatform: string;
   genre: string;
+  checkbox: boolean;
 }

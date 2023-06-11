@@ -25,11 +25,14 @@ export class ShowComponent {
   });
 
   shows: Show[];
-  stateObj: any;
+  checkboxIsChecked: false;
 
   getShows(): void {
-    this.showService.getShows().subscribe((shows) => {
+    this.showService.select().subscribe((shows) => {
       this.shows = shows;
+      this.shows.map((show) => {
+        show.checkbox = false;
+      });
     });
   }
 
@@ -59,5 +62,36 @@ export class ShowComponent {
         });
       }
     }
+  }
+
+  deleteShows() {
+    const showIds = this.shows
+      .filter((show) => show.checkbox)
+      .map((show) => show.id);
+    if (0 < showIds.length) {
+      this.showService.delete(showIds).subscribe({
+        next: (data: any) => {
+          this.getShows();
+        },
+        error: (err: any) => {
+          console.log('deleteShows() failed: ', err);
+        },
+      });
+    }
+  }
+
+  selectAllCheckboxes(isChecked: boolean): boolean {
+    this.shows.map((show) => {
+      show.checkbox = isChecked;
+    });
+    return isChecked;
+  }
+
+  updateCheckboxField(show: Show, isChecked: boolean) {
+    show.checkbox = isChecked;
+  }
+
+  exportShows() {
+    console.log('add a service call for printing here');
   }
 }

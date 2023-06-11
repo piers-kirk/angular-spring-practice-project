@@ -1,49 +1,71 @@
-<table id="tv-series-table">
-  <thead>
-    <tr>
-      <th>Show Name</th>
-      <th>Streaming Platform</th>
-      <th>Genre</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let show of shows">
-    <tr>
-      <td>{{ show.showName }}</td>
-      <td>{{ show.streamingPlatform }}</td>
-      <td>{{ show.genre }}</td>
-    </tr>
-  </tbody>
-</table>
-<br />
-
-<form [formGroup]="showForm">
-  <div class="input-container">
-    <input
-      type="text"
-      placeholder="Show Name"
-      formControlName="showName"
-      maxlength="30"
-    />
+<body>
+  <div id="delete-and-export">
+    <button mat-icon-button (click)="deleteShows()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-icon-button (click)="exportShows()">
+      <mat-icon>print</mat-icon>
+    </button>
   </div>
-  <div class="input-container">
-    <input
-      type="text"
-      placeholder="Streaming Platform"
-      formControlName="streamingPlatform"
-      maxlength="30"
-    />
-  </div>
-  <div class="input-container">
-    <input
-      type="text"
-      placeholder="Genre"
-      formControlName="genre"
-      maxlength="30"
-    />
-  </div>
+  <table id="tv-series-table">
+    <thead>
+      <tr>
+        <th>Show Name</th>
+        <th>Streaming Platform</th>
+        <th>Genre</th>
+        <mat-checkbox
+          [checked]="checkboxIsChecked"
+          (change)="selectAllCheckboxes($event.checked)"
+        >
+        </mat-checkbox>
+      </tr>
+    </thead>
+    <tbody *ngFor="let show of shows">
+      <tr>
+        <td>{{ show.showName }}</td>
+        <td>{{ show.streamingPlatform }}</td>
+        <td>{{ show.genre }}</td>
+        <td>
+          <mat-checkbox
+            [checked]="show.checkbox"
+            (change)="updateCheckboxField(show, $event.checked)"
+          >
+          </mat-checkbox>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <br />
-</form>
-<br />
-<button id="add-button" (click)="addShow()">Add Show</button>
-<br />
-<button id="delete-button" (click)="deleteShow()">Delete Last Show</button>
+
+  <form [formGroup]="showForm">
+    <div class="input-container">
+      <input
+        type="text"
+        placeholder="Show Name"
+        formControlName="showName"
+        maxlength="30"
+      />
+    </div>
+    <div class="input-container">
+      <input
+        type="text"
+        placeholder="Streaming Platform"
+        formControlName="streamingPlatform"
+        maxlength="30"
+      />
+    </div>
+    <div class="input-container">
+      <input
+        type="text"
+        placeholder="Genre"
+        formControlName="genre"
+        maxlength="30"
+      />
+    </div>
+    <br />
+  </form>
+  <br />
+  <button id="add-button" (click)="addShow()">Add Show</button>
+  <br />
+  <button id="delete-button" (click)="deleteShow()">Delete Last Show</button>
+</body>

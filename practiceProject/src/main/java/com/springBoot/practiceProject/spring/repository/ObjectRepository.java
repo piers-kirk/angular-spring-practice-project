@@ -12,14 +12,12 @@ public abstract class ObjectRepository<Model, Form> {
 	@Autowired
 	protected Environment env;
 		
-	public abstract Model select(long id);
-
-	public abstract List<Model> selectAll();
+	public abstract List<Model> select();
 	
 	public abstract int insert(Form form);
 	
 	public abstract int update(Form form);
 
-	public abstract int delete(long id);
+	public abstract int delete(List<Long> id);
 
 }
