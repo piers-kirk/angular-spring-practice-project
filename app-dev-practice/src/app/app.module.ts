@@ -9,9 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowComponent } from './show/show.component';
 import { MenuComponent } from './menu/menu.component';
+import { ShowDetailFormComponent } from './show-detail-form/show-detail-form.component';
 
 @NgModule({
-  declarations: [AppComponent, ShowComponent, MenuComponent],
+  declarations: [AppComponent, ShowComponent, MenuComponent, ShowDetailFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

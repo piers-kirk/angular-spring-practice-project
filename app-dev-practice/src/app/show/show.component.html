@@ -7,6 +7,7 @@
       <mat-icon>print</mat-icon>
     </button>
   </div>
+
   <table id="tv-series-table">
     <thead>
       <tr>
@@ -22,9 +23,11 @@
     </thead>
     <tbody *ngFor="let show of shows">
       <tr>
-        <td>{{ show.showName }}</td>
-        <td>{{ show.streamingPlatform }}</td>
-        <td>{{ show.genre }}</td>
+        <td (click)="navigateToShowDetailForm(show.id)">{{ show.showName }}</td>
+        <td (click)="navigateToShowDetailForm(show.id)">
+          {{ show.streamingPlatform }}
+        </td>
+        <td (click)="navigateToShowDetailForm(show.id)">{{ show.genre }}</td>
         <td>
           <mat-checkbox
             [checked]="show.checkbox"
@@ -68,4 +71,7 @@
   <button id="add-button" (click)="addShow()">Add Show</button>
   <br />
   <button id="delete-button" (click)="deleteShow()">Delete Last Show</button>
+  <br />
 </body>
+
+<router-outlet></router-outlet>

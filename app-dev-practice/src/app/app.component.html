@@ -3,12 +3,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <div id="screen">
     <br />
-    <h1>
-      {{ pageTitle }}
-    </h1>
+    <img src="assets/logo.png" alt="application-logo" />
     <app-menu></app-menu>
-    <body id="application-background">
-      <app-show></app-show>
-    </body>
+    <body id="application-background"></body>
+    <br />
+    <div id="display-shows-button">
+      <button mat-raised-button class="btn-default" [routerLink]="['/show']">
+        Menu
+      </button>
+    </div>
+    <router-outlet></router-outlet>
   </div>
 </html>

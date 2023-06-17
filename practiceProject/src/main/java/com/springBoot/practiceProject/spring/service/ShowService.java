@@ -1,18 +1,18 @@
-package com.springBoot.practiceProject.spring.repository;
+package com.springBoot.practiceProject.spring.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 // import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.stereotype.Service;
 
 import com.springBoot.practiceProject.form.ShowForm;
 import com.springBoot.practiceProject.spring.model.Show;
 import com.springBoot.practiceProject.spring.model.ShowRowMapper;
 
-@Repository
-public class ShowRepository extends ObjectRepository<Show, ShowForm> {
+@Service
+public class ShowService extends ObjectService<Show, ShowForm> {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

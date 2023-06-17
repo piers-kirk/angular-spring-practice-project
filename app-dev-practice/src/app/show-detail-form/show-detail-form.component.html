@@ -1,0 +1,72 @@
+<form [formGroup]="showDetailsForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="showName">Show Name:</label>
+    <input type="text" id="showName" formControlName="showName" required />
+    <div
+      *ngIf="
+        showDetailsForm.get('showName').invalid &&
+        showDetailsForm.get('showName').touched
+      "
+    >
+      Show Name is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="streamingPlatform">Streaming Platform:</label>
+    <input
+      type="text"
+      id="streamingPlatform"
+      formControlName="streamingPlatform"
+      required
+    />
+    <div
+      *ngIf="
+        showDetailsForm.get('streamingPlatform').invalid &&
+        showDetailsForm.get('streamingPlatform').touched
+      "
+    >
+      Streaming Platform is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" formControlName="genre" required />
+    <div
+      *ngIf="
+        showDetailsForm.get('genre').invalid &&
+        showDetailsForm.get('genre').touched
+      "
+    >
+      Genre is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="rating">Rating:</label>
+    <input type="text" id="rating" formControlName="rating" />
+  </div>
+
+  <div>
+    <label for="directedBy">Directed By:</label>
+    <input type="text" id="directedBy" formControlName="directedBy" />
+  </div>
+
+  <div>
+    <label for="starring">Starring:</label>
+    <input type="text" id="starring" formControlName="starring" />
+  </div>
+
+  <div>
+    <label for="runningTime">Running Time:</label>
+    <input type="text" id="runningTime" formControlName="runningTime" />
+  </div>
+
+  <div>
+    <label for="reception">Reception:</label>
+    <input type="text" id="reception" formControlName="reception" />
+  </div>
+
+  <button type="submit">Submit</button>
+</form>

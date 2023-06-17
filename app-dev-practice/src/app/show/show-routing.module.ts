@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShowDetailFormComponent } from './show-detail-form/show-detail-form.component';
-import { ShowComponent } from './show/show.component';
+import { ShowDetailFormComponent } from '../show-detail-form/show-detail-form.component';
 
 const routes: Routes = [
-  { path: 'show', component: ShowComponent },
   { path: 'show-detail-component/:id', component: ShowDetailFormComponent },
 ];
 
@@ -12,4 +10,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class ShowFormModule {}

@@ -23,4 +23,9 @@ export class ShowService {
     const url = 'http://localhost:8080/show/delete';
     return this.http.delete<Show>(url + '/' + showIds);
   }
+
+  export() {
+    const url = 'http://localhost:8080/show/export';
+    return this.http.get(url, { responseType: 'blob' });
+  }
 }

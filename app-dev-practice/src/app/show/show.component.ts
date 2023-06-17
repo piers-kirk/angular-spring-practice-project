@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ShowService } from './show.service';
 import { FormBuilder } from '@angular/forms';
 import { Show } from './show.interface';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-show',
@@ -11,7 +12,9 @@ import { Show } from './show.interface';
 export class ShowComponent {
   constructor(
     private showService: ShowService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -92,6 +95,21 @@ export class ShowComponent {
   }
 
   exportShows() {
-    console.log('add a service call for printing here');
+    this.showService.export().subscribe({
+      next: (response: Blob) => {
+        const blobURL = URL.createObjectURL(response);
+        const a = document.createElement('a');
+        a.href = blobURL;
+        a.target = '_blank';
+        a.click();
+      },
+      error: (err: any) => {
+        console.log('exportShows() failed: ', err);
+      },
+    });
+  }
+
+  navigateToShowDetailForm(showId: any) {
+    this.router.navigate(['show-detail-component', showId]);
   }
 }
