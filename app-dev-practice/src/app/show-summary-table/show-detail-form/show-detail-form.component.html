@@ -1,48 +1,100 @@
-<form [formGroup]="showDetailsForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="showName">Show Name:</label>
-    <input type="text" id="showName" formControlName="showName" required />
-  </div>
+<br />
+<mat-card id="flex-container">
+  <mat-card-header id="header">
+    Show Form{{ isUpdate ? " ID: " + this.showId : "" }}
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="showDetailsForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Show Name:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="showName"
+            formControlName="showName"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Streaming Platform:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="streamingPlatform"
+            formControlName="streamingPlatform"
+            required
+          />
+        </mat-form-field>
+      </div>
 
-  <div>
-    <label for="streamingPlatform">Streaming Platform:</label>
-    <input
-      type="text"
-      id="streamingPlatform"
-      formControlName="streamingPlatform"
-      required
-    />
-  </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Genre:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="genre"
+            formControlName="genre"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Rating:</mat-label>
+          <input matInput type="text" id="rating" formControlName="rating" />
+        </mat-form-field>
+      </div>
 
-  <div>
-    <label for="genre">Genre:</label>
-    <input type="text" id="genre" formControlName="genre" required />
-  </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Directed By:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="directedBy"
+            formControlName="directedBy"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Starring:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="starring"
+            formControlName="starring"
+          />
+        </mat-form-field>
+      </div>
 
-  <div>
-    <label for="rating">Rating:</label>
-    <input type="text" id="rating" formControlName="rating" />
-  </div>
-
-  <div>
-    <label for="directedBy">Directed By:</label>
-    <input type="text" id="directedBy" formControlName="directedBy" />
-  </div>
-
-  <div>
-    <label for="starring">Starring:</label>
-    <input type="text" id="starring" formControlName="starring" />
-  </div>
-
-  <div>
-    <label for="runningTime">Running Time:</label>
-    <input type="text" id="runningTime" formControlName="runningTime" />
-  </div>
-
-  <div>
-    <label for="reception">Reception:</label>
-    <input type="text" id="reception" formControlName="reception" />
-  </div>
-
-  <button type="submit">Submit</button>
-</form>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Running Time:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="runningTime"
+            formControlName="runningTime"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Reception:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="reception"
+            formControlName="reception"
+          />
+        </mat-form-field>
+      </div>
+      <ng-container *ngIf="isUpdate">
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ng-container>
+      <button mat-icon-button>
+        <mat-icon>save</mat-icon>
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<br />

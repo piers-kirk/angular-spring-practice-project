@@ -11,6 +11,7 @@ import { ShowSummaryTableService } from '../show-summary-table.service';
 export class ShowDetailFormComponent implements OnInit {
   showId: number;
   showDetailsForm: any;
+  isUpdate: boolean = false;
 
   constructor(
     private showSummaryTableService: ShowSummaryTableService,
@@ -33,6 +34,7 @@ export class ShowDetailFormComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.showId = params['showId'];
+      this.isUpdate = +this.showId !== 0;
     });
     this.createShowDetailForm();
   }
