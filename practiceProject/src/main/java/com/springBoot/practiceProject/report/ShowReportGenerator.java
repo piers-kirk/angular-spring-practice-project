@@ -37,7 +37,7 @@ public class ShowReportGenerator implements ObjectReportGenerator<Show> {
 	@Override
 	public ResponseEntity<byte[]> generateReport() throws Exception {
 
-		List<Show> shows = showService.select();
+		List<Show> shows = showService.selectAll();
 
 		Workbook wb = new HSSFWorkbook();
 		Sheet sheet = wb.createSheet("Shows");

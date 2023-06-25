@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-// import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Service;
 
 import com.springBoot.practiceProject.form.ShowForm;
@@ -21,17 +20,17 @@ public class ShowService extends ObjectService<Show, ShowForm> {
 	private ShowRowMapper showRowMapper;
 
 	@Override
-	public List<Show> select() {
-		return jdbcTemplate.query(env.getProperty("repository.show.query.select"), showRowMapper);
+	public List<Show> select(long showId) {
+		return jdbcTemplate.query(env.getProperty("repository.show.query.select"), showRowMapper, new Object[] { showId });
 	}
-	
+
+	@Override
+	public List<Show> selectAll() {
+		return jdbcTemplate.query(env.getProperty("repository.show.query.selectAll"), showRowMapper);
+	}
+
 	@Override
 	public int insert(ShowForm showForm) {
-//		MapSqlParameterSource parameters = new MapSqlParameterSource();
-//		parameters.addValue("showName", showForm.getShowName());
-//		parameters.addValue("streamingPlatform", showForm.getStreamingPlatform());
-//		parameters.addValue("genre", showForm.getGenre());
-//      return jdbcTemplate.update(env.getProperty("repository.show.query.insert"), parameters);
 		return jdbcTemplate.update(env.getProperty("repository.show.query.insert"),
 				new Object[] { showForm.getShowName(), showForm.getStreamingPlatform(), showForm.getGenre() });
 
@@ -39,21 +38,13 @@ public class ShowService extends ObjectService<Show, ShowForm> {
 
 	@Override
 	public int update(ShowForm showForm) {
-//		MapSqlParameterSource parameters = new MapSqlParameterSource();
-//		parameters.addValue("showId", showForm.getId());
-//		parameters.addValue("showName", showForm.getShowName());
-//		parameters.addValue("streamingPlatform", showForm.getStreamingPlatform());
-//		parameters.addValue("genre", showForm.getGenre());
-//		return jdbcTemplate.update(env.getProperty("repository.show.query.update"), parameters);
-		return jdbcTemplate.update(env.getProperty("repository.show.query.update"),
-				new Object[] { showForm.getShowName(), showForm.getStreamingPlatform(), showForm.getGenre(), showForm.getId() });
+		return jdbcTemplate.update(env.getProperty("repository.show.query.update"), new Object[] {
+				showForm.getShowName(), showForm.getStreamingPlatform(), showForm.getGenre(), showForm.getShowId() });
 	}
 
 	@Override
 	public int delete(List<Long> showIds) {
-//		return jdbcTemplate.update(env.getProperty("repository.show.query.delete"),
-//				new MapSqlParameterSource("showIds", showIds));
-		int i = 0; 
+		int i = 0;
 		for (; i < showIds.size(); i++) {
 			jdbcTemplate.update(env.getProperty("repository.show.query.delete"), new Object[] { showIds.get(i) });
 		}

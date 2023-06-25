@@ -3,6 +3,9 @@
     <button mat-icon-button (click)="deleteShows()">
       <mat-icon>delete</mat-icon>
     </button>
+    <button mat-icon-button (click)="navigateToShowDetailForm(0)">
+      <mat-icon>add_box</mat-icon>
+    </button>
     <button mat-icon-button (click)="exportShows()">
       <mat-icon>print</mat-icon>
     </button>
@@ -23,11 +26,15 @@
     </thead>
     <tbody *ngFor="let show of shows">
       <tr>
-        <td (click)="navigateToShowDetailForm(show.id)">{{ show.showName }}</td>
-        <td (click)="navigateToShowDetailForm(show.id)">
+        <td (click)="navigateToShowDetailForm(show.showId)">
+          {{ show.showName }}
+        </td>
+        <td (click)="navigateToShowDetailForm(show.showId)">
           {{ show.streamingPlatform }}
         </td>
-        <td (click)="navigateToShowDetailForm(show.id)">{{ show.genre }}</td>
+        <td (click)="navigateToShowDetailForm(show.showId)">
+          {{ show.genre }}
+        </td>
         <td>
           <mat-checkbox
             [checked]="show.checkbox"
@@ -40,7 +47,7 @@
   </table>
   <br />
 
-  <form [formGroup]="showForm">
+  <!-- <form [formGroup]="showForm">
     <div class="input-container">
       <input
         type="text"
@@ -66,12 +73,10 @@
       />
     </div>
     <br />
-  </form>
-  <br />
+  </form> -->
+  <!-- <br />
   <button id="add-button" (click)="addShow()">Add Show</button>
   <br />
   <button id="delete-button" (click)="deleteShow()">Delete Last Show</button>
-  <br />
+  <br /> -->
 </body>
-
-<router-outlet></router-outlet>

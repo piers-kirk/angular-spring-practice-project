@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Show } from './show.interface';
+import { Show } from '../interfaces/show.interface';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ShowService {
+export class ShowSummaryTableService {
   constructor(private http: HttpClient) {}
 
-  select(): Observable<Show[]> {
+  select(showId: any): Observable<Show[]> {
     const url = 'http://localhost:8080/show/select';
+    return this.http.get<Show[]>(url + '/' + showId);
+  }
+
+  selectAll(): Observable<Show[]> {
+    const url = 'http://localhost:8080/show/selectAll';
     return this.http.get<Show[]>(url);
   }
 

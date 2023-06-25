@@ -10,7 +10,9 @@ public abstract class ObjectService<Model, Form> {
 	@Autowired
 	protected Environment env;
 		
-	public abstract List<Model> select();
+	public abstract List<Model> select(long id);
+	
+	public abstract List<Model> selectAll();
 	
 	public abstract int insert(Form form);
 	

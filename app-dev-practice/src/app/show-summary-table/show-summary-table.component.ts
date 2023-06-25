@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { ShowService } from './show.service';
+import { ShowSummaryTableService } from './show-summary-table.service';
 import { FormBuilder } from '@angular/forms';
-import { Show } from './show.interface';
+import { Show } from '../interfaces/show.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-show',
-  templateUrl: './show.component.html',
-  styleUrls: ['./show.component.sass'],
+  selector: 'show-summary-table',
+  templateUrl: './show-summary-table.component.html',
+  styleUrls: ['./show-summary-table.component.sass'],
 })
-export class ShowComponent {
+export class ShowSummaryTableComponent {
   constructor(
-    private showService: ShowService,
+    private showSummaryTableService: ShowSummaryTableService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -31,7 +31,7 @@ export class ShowComponent {
   checkboxIsChecked: false;
 
   getShows(): void {
-    this.showService.select().subscribe((shows) => {
+    this.showSummaryTableService.selectAll().subscribe((shows) => {
       this.shows = shows;
       this.shows.map((show) => {
         show.checkbox = false;
@@ -40,7 +40,7 @@ export class ShowComponent {
   }
 
   public addShow() {
-    this.showService.save(this.showForm.getRawValue()).subscribe({
+    this.showSummaryTableService.save(this.showForm.getRawValue()).subscribe({
       next: (data: any) => {
         this.showForm.reset();
         this.getShows();
@@ -54,8 +54,8 @@ export class ShowComponent {
   public deleteShow() {
     if (0 < this.shows.length && this.shows.at(length - 1)) {
       const Show = this.shows.at(length - 1);
-      if (Show?.id) {
-        this.showService.delete(Show.id).subscribe({
+      if (Show?.showId) {
+        this.showSummaryTableService.delete(Show.showId).subscribe({
           next: (data: any) => {
             this.getShows();
           },
@@ -70,9 +70,9 @@ export class ShowComponent {
   deleteShows() {
     const showIds = this.shows
       .filter((show) => show.checkbox)
-      .map((show) => show.id);
+      .map((show) => show.showId);
     if (0 < showIds.length) {
-      this.showService.delete(showIds).subscribe({
+      this.showSummaryTableService.delete(showIds).subscribe({
         next: (data: any) => {
           this.getShows();
         },
@@ -95,7 +95,7 @@ export class ShowComponent {
   }
 
   exportShows() {
-    this.showService.export().subscribe({
+    this.showSummaryTableService.export().subscribe({
       next: (response: Blob) => {
         const blobURL = URL.createObjectURL(response);
         const a = document.createElement('a');
@@ -110,6 +110,6 @@ export class ShowComponent {
   }
 
   navigateToShowDetailForm(showId: any) {
-    this.router.navigate(['show-detail-component', showId]);
+    this.router.navigate(['shows/showDetail/', showId]);
   }
 }

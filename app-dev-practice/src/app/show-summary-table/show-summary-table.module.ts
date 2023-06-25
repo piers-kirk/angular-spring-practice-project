@@ -1,30 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import { MenuModule } from './menu/menu.module';
-import { ShowModule } from './show-summary-table/show-summary-table.module';
-import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { ShowDetailFormComponent } from './show-detail-form/show-detail-form.component';
+import { ShowSummaryTableComponent } from './show-summary-table.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [ShowSummaryTableComponent, ShowDetailFormComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    RouterModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
     HttpClientModule,
-    MenuModule,
-    ShowModule,
+    RouterModule,
   ],
-  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class ShowModule {}

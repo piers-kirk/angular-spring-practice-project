@@ -2,14 +2,6 @@
   <div>
     <label for="showName">Show Name:</label>
     <input type="text" id="showName" formControlName="showName" required />
-    <div
-      *ngIf="
-        showDetailsForm.get('showName').invalid &&
-        showDetailsForm.get('showName').touched
-      "
-    >
-      Show Name is required.
-    </div>
   </div>
 
   <div>
@@ -20,27 +12,11 @@
       formControlName="streamingPlatform"
       required
     />
-    <div
-      *ngIf="
-        showDetailsForm.get('streamingPlatform').invalid &&
-        showDetailsForm.get('streamingPlatform').touched
-      "
-    >
-      Streaming Platform is required.
-    </div>
   </div>
 
   <div>
     <label for="genre">Genre:</label>
     <input type="text" id="genre" formControlName="genre" required />
-    <div
-      *ngIf="
-        showDetailsForm.get('genre').invalid &&
-        showDetailsForm.get('genre').touched
-      "
-    >
-      Genre is required.
-    </div>
   </div>
 
   <div>

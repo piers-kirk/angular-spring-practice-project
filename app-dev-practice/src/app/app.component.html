@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <div id="screen">
-    <br />
-    <img src="assets/logo.png" alt="application-logo" />
-    <app-menu></app-menu>
-    <body id="application-background"></body>
-    <br />
-    <div id="display-shows-button">
-      <button mat-raised-button class="btn-default" [routerLink]="['/show']">
-        Menu
-      </button>
-    </div>
-    <router-outlet></router-outlet>
+<body>
+  <br />
+  <img src="assets/logo.png" alt="application-logo" />
+  <br />
+  <div id="shows-btn">
+    <button mat-raised-button [routerLink]="['/shows']">Menu</button>
   </div>
-</html>
+  <router-outlet></router-outlet>
+</body>

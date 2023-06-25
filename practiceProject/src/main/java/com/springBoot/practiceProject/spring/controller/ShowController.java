@@ -29,14 +29,24 @@ public class ShowController {
 	@Autowired 
 	private ShowReportGenerator showReportGenerator;
 	
-	@GetMapping("select")
-	public List<Show> select() {
-		return this.showService.select();
+	@GetMapping("select/{showId}")
+	public List<Show> select(@PathVariable Long showId) {
+		return this.showService.select(showId);
+	}
+	
+	@GetMapping("selectAll")
+	public List<Show> selectAll() {
+		return this.showService.selectAll();
 	}
 
 	@PostMapping("save")
 	public int saveShow(@RequestBody ShowForm showForm) {
-		return this.showService.insert(showForm);
+		boolean isUpdate = showForm.getShowId() != null; 
+		if (isUpdate) {
+			return this.showService.update(showForm);
+		} else {
+			return this.showService.insert(showForm);
+		}
 	}
 
 	@DeleteMapping("delete/{showIds}")
