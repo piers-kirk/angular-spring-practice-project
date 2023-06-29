@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ShowDetailFormComponent } from './show-detail-form/show-detail-form.component';
@@ -23,6 +25,8 @@ import { ShowSummaryTableComponent } from './show-summary-table.component';
     MatCheckboxModule,
     MatIconModule,
     MatCardModule,
+    MatTableModule,
+    MatSortModule,
     HttpClientModule,
     RouterModule,
   ],

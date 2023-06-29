@@ -1,19 +1,25 @@
 <body>
-  <!-- <button mat-icon-button (click)="openNetflix($event)">
-    <mat-icon>delete</mat-icon>
+  <button mat-button [matMenuTriggerFor]="aboveMenu">
+    <mat-icon>movie</mat-icon>Movies
   </button>
-  <button mat-icon-button (click)="openMax($event)">
-    <mat-icon>print</mat-icon>
+  <mat-menu #aboveMenu="matMenu" yPosition="above">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="belowMenu">
+    <mat-icon>tv</mat-icon>TV Shows
   </button>
-  <button mat-icon-button (click)="openNetflix($event)">
-    <mat-icon>explore</mat-icon>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="beforeMenu">
+    <mat-icon>videogame_asset</mat-icon>Games
   </button>
-  <button mat-icon-button (click)="openMax($event)">
-    <mat-icon>save</mat-icon>
-  </button>
-  <img src="assets/menu-icons/netflix-logo.png" alt="netflix-logo" />
-  <img src="assets/menu-icons/hbo-max-logo.png" alt="hbo-max-logo" />
-  <img src="assets/menu-icons/disney-plus-logo.png" alt="disney-plus-logo" />
-  <img src="assets/menu-icons/prime-video-logo.png" alt="prime-video-logo" /> -->
-  <!-- <h1>WELCOME</h1> -->
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
 </body>

@@ -11,72 +11,59 @@
     </button>
   </div>
 
-  <table id="tv-series-table">
-    <thead>
-      <tr>
-        <th>Show Name</th>
-        <th>Streaming Platform</th>
-        <th>Genre</th>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox
-          [checked]="checkboxIsChecked"
-          (change)="selectAllCheckboxes($event.checked)"
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
         >
         </mat-checkbox>
-      </tr>
-    </thead>
-    <tbody *ngFor="let show of shows">
-      <tr>
-        <td (click)="navigateToShowDetailForm(show.showId)">
-          {{ show.showName }}
-        </td>
-        <td (click)="navigateToShowDetailForm(show.showId)">
-          {{ show.streamingPlatform }}
-        </td>
-        <td (click)="navigateToShowDetailForm(show.showId)">
-          {{ show.genre }}
-        </td>
-        <td>
-          <mat-checkbox
-            [checked]="show.checkbox"
-            (change)="updateCheckboxField(show, $event.checked)"
-          >
-          </mat-checkbox>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <br />
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
 
-  <!-- <form [formGroup]="showForm">
-    <div class="input-container">
-      <input
-        type="text"
-        placeholder="Show Name"
-        formControlName="showName"
-        maxlength="30"
-      />
-    </div>
-    <div class="input-container">
-      <input
-        type="text"
-        placeholder="Streaming Platform"
-        formControlName="streamingPlatform"
-        maxlength="30"
-      />
-    </div>
-    <div class="input-container">
-      <input
-        type="text"
-        placeholder="Genre"
-        formControlName="genre"
-        maxlength="30"
-      />
-    </div>
-    <br />
-  </form> -->
-  <!-- <br />
-  <button id="add-button" (click)="addShow()">Add Show</button>
-  <br />
-  <button id="delete-button" (click)="deleteShow()">Delete Last Show</button>
-  <br /> -->
+    <ng-container matColumnDef="showName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Show Name</th>
+      <td
+        mat-cell
+        *matCellDef="let show"
+        (click)="navigateToShowDetailForm(show.showId)"
+      >
+        {{ show.showName }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="streamingPlatform">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Streaming Platform
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let show"
+        (click)="navigateToShowDetailForm(show.showId)"
+      >
+        {{ show.streamingPlatform }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="genre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Genre</th>
+      <td
+        mat-cell
+        *matCellDef="let show"
+        (click)="navigateToShowDetailForm(show.showId)"
+      >
+        {{ show.genre }}
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </body>

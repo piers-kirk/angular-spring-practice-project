@@ -8,5 +8,4 @@ export interface Show {
   directedBy: string;
   starring: string;
   reception: string;
-  checkbox: boolean;
 }

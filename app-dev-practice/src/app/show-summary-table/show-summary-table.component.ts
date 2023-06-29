@@ -3,6 +3,11 @@ import { ShowSummaryTableService } from './show-summary-table.service';
 import { FormBuilder } from '@angular/forms';
 import { Show } from '../interfaces/show.interface';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { ViewChild } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'show-summary-table',
@@ -13,64 +18,35 @@ export class ShowSummaryTableComponent {
   constructor(
     private showSummaryTableService: ShowSummaryTableService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  shows: Show[];
+  dataSource: MatTableDataSource<Show>;
+  displayedColumns: string[] = [
+    'select',
+    'showName',
+    'streamingPlatform',
+    'genre',
+  ];
+  selection = new SelectionModel<Show>(true, []);
 
   ngOnInit() {
     this.getShows();
   }
 
-  showForm = this.formBuilder.group({
-    showName: null,
-    streamingPlatform: null,
-    genre: null,
-  });
-
-  shows: Show[];
-  checkboxIsChecked: false;
-
   getShows(): void {
     this.showSummaryTableService.selectAll().subscribe((shows) => {
       this.shows = shows;
-      this.shows.map((show) => {
-        show.checkbox = false;
-      });
+      this.dataSource = new MatTableDataSource(this.shows);
+      this.dataSource.sort = this.sort;
     });
-  }
-
-  public addShow() {
-    this.showSummaryTableService.save(this.showForm.getRawValue()).subscribe({
-      next: (data: any) => {
-        this.showForm.reset();
-        this.getShows();
-      },
-      error: (err: any) => {
-        console.log('addShow() failed: ', err);
-      },
-    });
-  }
-
-  public deleteShow() {
-    if (0 < this.shows.length && this.shows.at(length - 1)) {
-      const Show = this.shows.at(length - 1);
-      if (Show?.showId) {
-        this.showSummaryTableService.delete(Show.showId).subscribe({
-          next: (data: any) => {
-            this.getShows();
-          },
-          error: (err: any) => {
-            console.log('deleteShow() failed: ', err);
-          },
-        });
-      }
-    }
   }
 
   deleteShows() {
-    const showIds = this.shows
-      .filter((show) => show.checkbox)
-      .map((show) => show.showId);
+    const showIds = this.selection.selected.map((show) => show.showId);
     if (0 < showIds.length) {
       this.showSummaryTableService.delete(showIds).subscribe({
         next: (data: any) => {
@@ -83,23 +59,13 @@ export class ShowSummaryTableComponent {
     }
   }
 
-  selectAllCheckboxes(isChecked: boolean): boolean {
-    this.shows.map((show) => {
-      show.checkbox = isChecked;
-    });
-    return isChecked;
-  }
-
-  updateCheckboxField(show: Show, isChecked: boolean) {
-    show.checkbox = isChecked;
-  }
-
   exportShows() {
     this.showSummaryTableService.export().subscribe({
       next: (response: Blob) => {
         const blobURL = URL.createObjectURL(response);
         const a = document.createElement('a');
         a.href = blobURL;
+        a.download = 'shows.xlsx'; // Specify the desired filename
         a.target = '_blank';
         a.click();
       },
@@ -111,5 +77,17 @@ export class ShowSummaryTableComponent {
 
   navigateToShowDetailForm(showId: any) {
     this.router.navigate(['shows/showDetail/', showId]);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
 }

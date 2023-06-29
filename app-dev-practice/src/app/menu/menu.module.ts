@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './menu.component';
 
@@ -15,6 +16,7 @@ import { MenuComponent } from './menu.component';
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
+    MatMenuModule,
     HttpClientModule,
   ],
 })

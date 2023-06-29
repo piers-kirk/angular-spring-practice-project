@@ -150,14 +150,14 @@ public class ShowReportGenerator implements ObjectReportGenerator<Show> {
 		wb.close();
 
 		HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
-        try {
-            String encodedFileName = URLEncoder.encode("shows.xlsx", "UTF-8");
-            headers.setContentDispositionFormData("attachment", encodedFileName);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(fileBytes, headers, HttpStatus.OK);
+		headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+		try {
+		    String encodedFileName = URLEncoder.encode("shows.xlsx", "UTF-8");
+		    headers.set("Content-Disposition", "attachment; filename=\"" + encodedFileName + "\"");
+		} catch (UnsupportedEncodingException e) {
+		    e.printStackTrace();
+		}
+		return new ResponseEntity<>(fileBytes, headers, HttpStatus.OK);
 
 	}
 
