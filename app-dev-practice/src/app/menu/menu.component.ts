@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'menu',
@@ -6,11 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.sass'],
 })
 export class MenuComponent {
-  openNetflix(event: any) {
-    window.open('https://www.netflix.com', '_blank');
-  }
-
-  openMax(event: any) {
-    window.open('https://play.max.com', '_blank');
+  constructor(private router: Router) {}
+  navigateToRoute(endpoint: any) {
+    this.router.navigate([endpoint]);
   }
 }

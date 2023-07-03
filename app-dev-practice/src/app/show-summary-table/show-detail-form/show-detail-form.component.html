@@ -1,100 +1,105 @@
-<br />
-<mat-card id="flex-container">
-  <mat-card-header id="header">
-    Show Form{{ isUpdate ? " ID: " + this.showId : "" }}
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="showDetailsForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <mat-form-field>
-          <mat-label>Show Name:</mat-label>
-          <input
-            matInput
-            type="text"
-            id="showName"
-            formControlName="showName"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Streaming Platform:</mat-label>
-          <input
-            matInput
-            type="text"
-            id="streamingPlatform"
-            formControlName="streamingPlatform"
-            required
-          />
-        </mat-form-field>
-      </div>
+<body>
+  <br />
+  <mat-card id="flex-container">
+    <mat-card-header id="header">
+      Show Form{{ isUpdate ? " ID: " + this.showId : "" }}
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="showDetailsForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Show Name:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="showName"
+              formControlName="showName"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Streaming Platform:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="streamingPlatform"
+              formControlName="streamingPlatform"
+              required
+            />
+          </mat-form-field>
+        </div>
 
-      <div class="row">
-        <mat-form-field>
-          <mat-label>Genre:</mat-label>
-          <input
-            matInput
-            type="text"
-            id="genre"
-            formControlName="genre"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Rating:</mat-label>
-          <input matInput type="text" id="rating" formControlName="rating" />
-        </mat-form-field>
-      </div>
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Genre:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="genre"
+              formControlName="genre"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Rating:</mat-label>
+            <input matInput type="text" id="rating" formControlName="rating" />
+          </mat-form-field>
+        </div>
 
-      <div class="row">
-        <mat-form-field>
-          <mat-label>Directed By:</mat-label>
-          <input
-            matInput
-            type="text"
-            id="directedBy"
-            formControlName="directedBy"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Starring:</mat-label>
-          <input
-            matInput
-            type="text"
-            id="starring"
-            formControlName="starring"
-          />
-        </mat-form-field>
-      </div>
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Directed By:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="directedBy"
+              formControlName="directedBy"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Starring:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="starring"
+              formControlName="starring"
+            />
+          </mat-form-field>
+        </div>
 
-      <div class="row">
-        <mat-form-field>
-          <mat-label>Running Time:</mat-label>
-          <input
-            matInput
-            type="text"
-            id="runningTime"
-            formControlName="runningTime"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Reception:</mat-label>
-          <input
-            matInput
-            type="text"
-            id="reception"
-            formControlName="reception"
-          />
-        </mat-form-field>
-      </div>
-      <ng-container *ngIf="isUpdate">
-        <button mat-icon-button>
-          <mat-icon>delete</mat-icon>
-        </button>
-      </ng-container>
-      <button mat-icon-button>
-        <mat-icon>save</mat-icon>
-      </button>
-    </form>
-  </mat-card-content>
-</mat-card>
-<br />
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Running Time:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="runningTime"
+              formControlName="runningTime"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Reception:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="reception"
+              formControlName="reception"
+            />
+          </mat-form-field>
+        </div>
+        <span class="left-align">
+          <button mat-button (click)="navigateToRoute()">
+            <mat-icon>arrow_back</mat-icon>Back
+          </button>
+        </span>
+        <span class="right-align">
+          <ng-container *ngIf="isUpdate">
+            <button mat-button><mat-icon>delete</mat-icon>Delete</button>
+          </ng-container>
+          <button mat-button><mat-icon>save</mat-icon>Save</button>
+        </span>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <br />
+</body>

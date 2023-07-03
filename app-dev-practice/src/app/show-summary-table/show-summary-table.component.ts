@@ -75,6 +75,10 @@ export class ShowSummaryTableComponent {
     });
   }
 
+  navigateToRoute() {
+    this.router.navigate(['menu']);
+  }
+
   navigateToShowDetailForm(showId: any) {
     this.router.navigate(['shows/showDetail/', showId]);
   }

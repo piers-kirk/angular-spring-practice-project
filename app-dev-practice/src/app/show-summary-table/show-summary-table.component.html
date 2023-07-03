@@ -1,14 +1,21 @@
 <body>
   <div id="delete-and-export">
-    <button mat-icon-button (click)="deleteShows()">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button mat-icon-button (click)="navigateToShowDetailForm(0)">
-      <mat-icon>add_box</mat-icon>
-    </button>
-    <button mat-icon-button (click)="exportShows()">
-      <mat-icon>print</mat-icon>
-    </button>
+    <span class="left-align">
+      <button mat-button (click)="navigateToRoute()">
+        <mat-icon>arrow_back</mat-icon>Back
+      </button>
+    </span>
+    <span class="right-align">
+      <button mat-button (click)="deleteShows()">
+        <mat-icon>delete</mat-icon>Delete
+      </button>
+      <button mat-button (click)="navigateToShowDetailForm(0)">
+        <mat-icon>add_box</mat-icon>Add
+      </button>
+      <button mat-button (click)="exportShows()">
+        <mat-icon>print</mat-icon>Export
+      </button>
+    </span>
   </div>
 
   <table mat-table [dataSource]="dataSource" matSort>

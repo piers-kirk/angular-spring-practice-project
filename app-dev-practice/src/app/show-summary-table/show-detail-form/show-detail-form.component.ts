@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ShowSummaryTableService } from '../show-summary-table.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'show-detail-form',
@@ -16,7 +17,8 @@ export class ShowDetailFormComponent implements OnInit {
   constructor(
     private showSummaryTableService: ShowSummaryTableService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.showDetailsForm = this.formBuilder.group({
       showId: [''],
@@ -61,7 +63,12 @@ export class ShowDetailFormComponent implements OnInit {
     }
   }
 
+  navigateToRoute() {
+    this.router.navigate(['shows']);
+  }
+
   onSubmit() {
+    console.log(event);
     this.showSummaryTableService
       .save(this.showDetailsForm.getRawValue())
       .subscribe({
