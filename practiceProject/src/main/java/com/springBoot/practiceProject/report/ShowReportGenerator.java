@@ -128,10 +128,10 @@ public class ShowReportGenerator implements ObjectReportGenerator<Show> {
 			cell.setCellValue(shows.get(i).getShowName());
 			cell.setCellStyle(bodyStyle);
 			cell = row.createCell(1);
-			cell.setCellValue(shows.get(i).getStreamingPlatform());
+			// cell.setCellValue(shows.get(i).getStreamingPlatform());
 			cell.setCellStyle(bodyStyle);
 			cell = row.createCell(2);
-			cell.setCellValue(shows.get(i).getGenre());
+			// cell.setCellValue(shows.get(i).getGenre());
 			cell.setCellStyle(bodyStyle);
 		}
 

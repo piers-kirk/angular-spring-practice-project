@@ -20,6 +20,7 @@ export class ShowSummaryTableService {
   }
 
   save(show: any) {
+    console.log(show);
     const url = 'http://localhost:8080/show/save';
     return this.http.post<Show>(url, show);
   }
@@ -32,5 +33,12 @@ export class ShowSummaryTableService {
   export() {
     const url = 'http://localhost:8080/show/export';
     return this.http.get(url, { responseType: 'blob' });
+  }
+
+  searchShow(showName: string) {
+    const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
+      showName
+    )}`;
+    return this.http.get(url);
   }
 }

@@ -14,13 +14,10 @@ public class ShowRowMapper implements RowMapper<Show> {
 		Show show = new Show();
 		show.setShowId(rs.getLong("ShowID"));
 		show.setShowName(rs.getString("ShowName"));
-		show.setStreamingPlatform(rs.getString("StreamingPlatform"));
-		show.setGenre(rs.getString("Genre"));
-		show.setRating(rs.getString("Rating"));
-		show.setRunningTime(rs.getLong("RunningTime"));
-		show.setDirectedBy(rs.getString("DirectedBy"));
-		show.setStarring(rs.getString("Starring"));
-		show.setReception(rs.getString("Reception"));
+		show.setEpisodesWatched(rs.getInt("EpisodesWatched"));
+		show.setDateLastWatched(rs.getDate("DateLastWatched"));
+		show.setThoughts(rs.getString("Thoughts"));
+		show.setUserRating(rs.getInt("UserRating"));
 		return show;
 	}
 

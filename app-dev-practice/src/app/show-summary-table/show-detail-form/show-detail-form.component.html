@@ -1,105 +1,206 @@
 <body>
   <br />
-  <mat-card id="flex-container">
-    <mat-card-header id="header">
-      Show Form{{ isUpdate ? " ID: " + this.showId : "" }}
-    </mat-card-header>
+  <mat-card class="flex-container">
+    <mat-card-title class="header">{{
+      this.showDetailsForm.controls.name.value
+    }}</mat-card-title>
+    <mat-card-subtitle>
+      <mat-icon
+        class="rating-container"
+        *ngFor="let rating of ratings"
+        class="star"
+        (click)="selectRating(rating)"
+        [ngClass]="{ filled: rating <= selectedRating }"
+        >star</mat-icon
+      ></mat-card-subtitle
+    >
+    <br />
+    <div *ngIf="errors.length > 0" class="error-messages">
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+    </div>
     <mat-card-content>
-      <form [formGroup]="showDetailsForm" (ngSubmit)="onSubmit()">
+      <form
+        [formGroup]="showDetailsForm"
+        (ngSubmit)="onSubmit()"
+        class="text-center"
+      >
         <div class="row">
-          <mat-form-field>
-            <mat-label>Show Name:</mat-label>
+          <mat-form-field class="left-column">
             <input
               matInput
-              type="text"
-              id="showName"
-              formControlName="showName"
+              type="number"
+              id="episodesWatched"
+              formControlName="episodesWatched"
               required
             />
+            <mat-label>Episodes Watched: </mat-label>
+            <mat-error *ngIf="showDetailsForm.controls.episodesWatched.invalid">
+              Please enter a non-negative integer.
+            </mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>Streaming Platform:</mat-label>
+
+          <mat-form-field class="right-column">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="dateLastWatched"
+            />
+            <mat-label>Date Last Watched: </mat-label>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <br />
+        <div class="row">
+          <mat-form-field class="use-entire-row">
+            <mat-label>Thoughts: </mat-label>
+            <textarea
+              matInput
+              maxlength="2001"
+              placeholder="e.g. I didn't expect..."
+              formControlName="thoughts"
+              #thoughts
+            ></textarea>
+          </mat-form-field>
+          <mat-error *ngIf="thoughts.value && thoughts.value.length > 2000"
+            >Max 2000 characters</mat-error
+          >
+        </div>
+
+        <br />
+        <div class="row">
+          <span class="left-align">
+            <button mat-button (click)="navigateToRoute()">
+              <mat-icon>arrow_back</mat-icon>Back
+            </button>
+          </span>
+          <span class="right-align">
+            <ng-container *ngIf="isUpdate">
+              <button mat-button><mat-icon>delete</mat-icon>Delete</button>
+            </ng-container>
+            <button mat-button><mat-icon>save</mat-icon>Save</button>
+          </span>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <br />
+
+  <mat-card class="flex-container">
+    <br />
+    <mat-card-title class="header-2">Show Details</mat-card-title>
+    <br />
+    <mat-card-content>
+      <form [formGroup]="showDetailsForm">
+        <div class="row">
+          <mat-form-field class="left-column">
+            <mat-label>Show Type:</mat-label>
+            <input matInput type="text" id="type" formControlName="type" />
+          </mat-form-field>
+          <mat-form-field class="right-column">
+            <mat-label>Show Language:</mat-label>
             <input
               matInput
               type="text"
-              id="streamingPlatform"
-              formControlName="streamingPlatform"
-              required
+              id="language"
+              formControlName="language"
             />
           </mat-form-field>
         </div>
 
         <div class="row">
-          <mat-form-field>
-            <mat-label>Genre:</mat-label>
+          <mat-form-field class="left-column">
+            <mat-label>Show Genres:</mat-label>
+            <input matInput type="text" id="genres" formControlName="genres" />
+          </mat-form-field>
+          <mat-form-field class="right-column">
+            <mat-label>Show Status:</mat-label>
+            <input matInput type="text" id="status" formControlName="status" />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="left-column">
+            <mat-label>Show Runtime (minutes):</mat-label>
             <input
               matInput
               type="text"
-              id="genre"
-              formControlName="genre"
-              required
+              id="runtime"
+              formControlName="runtime"
             />
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>Rating:</mat-label>
+          <mat-form-field class="right-column">
+            <mat-label>Show Premiered Date:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="premiered"
+              formControlName="premiered"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="left-column">
+            <mat-label>Show Official Site:</mat-label>
+            <input
+              matInput
+              type="text"
+              id="officialSite"
+              formControlName="officialSite"
+            />
+          </mat-form-field>
+          <mat-form-field class="right-column">
+            <mat-label>Show Rating:</mat-label>
             <input matInput type="text" id="rating" formControlName="rating" />
           </mat-form-field>
         </div>
 
         <div class="row">
-          <mat-form-field>
-            <mat-label>Directed By:</mat-label>
+          <mat-form-field class="left-column">
+            <mat-label>Show Network:</mat-label>
             <input
               matInput
               type="text"
-              id="directedBy"
-              formControlName="directedBy"
+              id="network"
+              formControlName="network"
             />
           </mat-form-field>
-          <mat-form-field>
-            <mat-label>Starring:</mat-label>
+          <mat-form-field class="right-column">
+            <mat-label>Show Web Channel:</mat-label>
             <input
               matInput
               type="text"
-              id="starring"
-              formControlName="starring"
+              id="webChannel"
+              formControlName="webChannel"
             />
           </mat-form-field>
         </div>
 
         <div class="row">
-          <mat-form-field>
-            <mat-label>Running Time:</mat-label>
-            <input
+          <mat-form-field class="left-column">
+            <mat-label>Show Summary:</mat-label>
+            <textarea
               matInput
-              type="text"
-              id="runningTime"
-              formControlName="runningTime"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Reception:</mat-label>
-            <input
-              matInput
-              type="text"
-              id="reception"
-              formControlName="reception"
-            />
+              id="summary"
+              formControlName="summary"
+              [innerHTML]="this.showDetailsForm.controls.summary.value"
+            ></textarea>
           </mat-form-field>
         </div>
-        <span class="left-align">
-          <button mat-button (click)="navigateToRoute()">
-            <mat-icon>arrow_back</mat-icon>Back
-          </button>
-        </span>
-        <span class="right-align">
-          <ng-container *ngIf="isUpdate">
-            <button mat-button><mat-icon>delete</mat-icon>Delete</button>
-          </ng-container>
-          <button mat-button><mat-icon>save</mat-icon>Save</button>
-        </span>
       </form>
     </mat-card-content>
   </mat-card>
+  <br />
+  <img
+    src="{{ this.showDetailsForm.controls.image.value.original }}"
+    alt="{{ this.showDetailsForm.controls.name.value }} Image"
+  />
   <br />
 </body>

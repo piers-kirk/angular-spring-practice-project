@@ -9,7 +9,7 @@
       <button mat-button (click)="deleteShows()">
         <mat-icon>delete</mat-icon>Delete
       </button>
-      <button mat-button (click)="navigateToShowDetailForm(0)">
+      <button mat-button (click)="navigateToShowInitialForm()">
         <mat-icon>add_box</mat-icon>Add
       </button>
       <button mat-button (click)="exportShows()">
@@ -48,26 +48,38 @@
         {{ show.showName }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="streamingPlatform">
+    <ng-container matColumnDef="episodesWatched">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Streaming Platform
+        Episodes Watched
       </th>
       <td
         mat-cell
         *matCellDef="let show"
         (click)="navigateToShowDetailForm(show.showId)"
       >
-        {{ show.streamingPlatform }}
+        {{ show.episodesWatched }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="genre">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Genre</th>
+    <ng-container matColumnDef="dateLastWatched">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Date Last Watched
+      </th>
       <td
         mat-cell
         *matCellDef="let show"
         (click)="navigateToShowDetailForm(show.showId)"
       >
-        {{ show.genre }}
+        {{ show.dateLastWatched }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="userRating">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+      <td
+        mat-cell
+        *matCellDef="let show"
+        (click)="navigateToShowDetailForm(show.showId)"
+      >
+        {{ show.userRating }}
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

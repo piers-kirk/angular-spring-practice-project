@@ -32,14 +32,24 @@ public class ShowService extends ObjectService<Show, ShowForm> {
 	@Override
 	public int insert(ShowForm showForm) {
 		return jdbcTemplate.update(env.getProperty("repository.show.query.insert"),
-				new Object[] { showForm.getShowName(), showForm.getStreamingPlatform(), showForm.getGenre() });
-
+				new Object[] { showForm.getShowName(), 
+						showForm.getEpisodesWatched(), 
+						showForm.getDateLastWatched(),
+						showForm.getThoughts(), 
+						showForm.getUserRating()
+						});
 	}
 
 	@Override
 	public int update(ShowForm showForm) {
-		return jdbcTemplate.update(env.getProperty("repository.show.query.update"), new Object[] {
-				showForm.getShowName(), showForm.getStreamingPlatform(), showForm.getGenre(), showForm.getShowId() });
+		return jdbcTemplate.update(env.getProperty("repository.show.query.update"), 				
+				new Object[] { showForm.getShowName(), 
+				showForm.getEpisodesWatched(), 
+				showForm.getDateLastWatched(),				
+				showForm.getThoughts(),
+				showForm.getUserRating(),
+				showForm.getShowId()
+				});
 	}
 
 	@Override

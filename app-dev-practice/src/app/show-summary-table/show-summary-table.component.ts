@@ -3,11 +3,13 @@ import { ShowSummaryTableService } from './show-summary-table.service';
 import { FormBuilder } from '@angular/forms';
 import { Show } from '../interfaces/show.interface';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
+import { ShowInitialFormComponent } from './show-initial-form/show-initial-form.component';
 
 @Component({
   selector: 'show-summary-table',
@@ -18,7 +20,8 @@ export class ShowSummaryTableComponent {
   constructor(
     private showSummaryTableService: ShowSummaryTableService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   @ViewChild(MatSort) sort: MatSort;
@@ -28,8 +31,9 @@ export class ShowSummaryTableComponent {
   displayedColumns: string[] = [
     'select',
     'showName',
-    'streamingPlatform',
-    'genre',
+    'episodesWatched',
+    'dateLastWatched',
+    'userRating',
   ];
   selection = new SelectionModel<Show>(true, []);
 
@@ -79,7 +83,19 @@ export class ShowSummaryTableComponent {
     this.router.navigate(['menu']);
   }
 
+  navigateToShowInitialForm() {
+    const dialogRef = this.dialog.open(ShowInitialFormComponent, {
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'next') {
+        this.router.navigate(['shows/showDetail/', 0]);
+      }
+    });
+  }
+
   navigateToShowDetailForm(showId: any) {
+    console.log(showId);
     this.router.navigate(['shows/showDetail/', showId]);
   }
 

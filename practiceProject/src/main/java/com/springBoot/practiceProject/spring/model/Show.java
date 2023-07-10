@@ -1,16 +1,15 @@
 package com.springBoot.practiceProject.spring.model;
 
+import java.sql.Date;
+
 public class Show {
 
 	private long showId;
 	private String showName;
-	private String streamingPlatform;
-	private String genre;
-	private String rating;
-	private Long runningTime;
-	private String directedBy;
-	private String starring;
-	private String reception;
+	private long episodesWatched;
+	private Date dateLastWatched;
+	private String thoughts;
+	private long userRating;
 
 	public long getShowId() {
 		return showId;
@@ -28,60 +27,36 @@ public class Show {
 		this.showName = showName;
 	}
 
-	public String getStreamingPlatform() {
-		return streamingPlatform;
+	public long getEpisodesWatched() {
+		return episodesWatched;
 	}
 
-	public void setStreamingPlatform(String streamingPlatform) {
-		this.streamingPlatform = streamingPlatform;
+	public void setEpisodesWatched(long episodesWatched) {
+		this.episodesWatched = episodesWatched;
 	}
 
-	public String getGenre() {
-		return genre;
+	public Date getDateLastWatched() {
+		return dateLastWatched;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setDateLastWatched(Date dateLastWatched) {
+		this.dateLastWatched = dateLastWatched;
 	}
 
-	public String getRating() {
-		return rating;
+	public String getThoughts() {
+		return thoughts;
 	}
 
-	public void setRating(String rating) {
-		this.rating = rating;
+	public void setThoughts(String thoughts) {
+		this.thoughts = thoughts;
 	}
 
-	public Long getRunningTime() {
-		return runningTime;
+	public long getUserRating() {
+		return userRating;
 	}
 
-	public void setRunningTime(Long runningTime) {
-		this.runningTime = runningTime;
-	}
-
-	public String getDirectedBy() {
-		return directedBy;
-	}
-
-	public void setDirectedBy(String directedBy) {
-		this.directedBy = directedBy;
-	}
-
-	public String getStarring() {
-		return starring;
-	}
-
-	public void setStarring(String starring) {
-		this.starring = starring;
-	}
-
-	public String getReception() {
-		return reception;
-	}
-
-	public void setReception(String reception) {
-		this.reception = reception;
+	public void setUserRating(long userRating) {
+		this.userRating = userRating;
 	}
 
 }
