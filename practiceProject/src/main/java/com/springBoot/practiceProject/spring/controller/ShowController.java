@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -64,14 +65,22 @@ public class ShowController {
 
 	        return ResponseEntity.badRequest().body(errors);
 	    }
-		boolean isUpdate = showForm.getShowId() != null; 
-		if (isUpdate) {
-			this.showService.update(showForm);
-		} else {
-			this.showService.insert(showForm);
-		}
-		 return ResponseEntity.ok("Show saved successfully.");
+
+	    boolean isUpdate = showForm.getShowId() != null;
+	    try {
+	        if (isUpdate) {
+	            this.showService.update(showForm);
+	        } else {
+	            this.showService.insert(showForm);
+	        }
+	        return ResponseEntity.ok().body("{\"message\": \"Show saved successfully.\"}");
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("{\"message\": \"An error occurred while saving the show.\"}");
+	    }
 	}
+
+
 
 	@DeleteMapping("delete/{showIds}")
 	public int deleteShow(@PathVariable List<Long> showIds) {

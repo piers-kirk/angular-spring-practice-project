@@ -116,10 +116,10 @@ public class ShowReportGenerator implements ObjectReportGenerator<Show> {
 		cell.setCellValue("Show Name");
 		cell.setCellStyle(headerStyle);
 		cell = row.createCell(1);
-		cell.setCellValue("Streaming Platform");
+		cell.setCellValue("Episodes Watched");
 		cell.setCellStyle(headerStyle);
 		cell = row.createCell(2);
-		cell.setCellValue("Genre");
+		cell.setCellValue("Rating");
 		cell.setCellStyle(headerStyle);
 
 		for (int i = 0; i < shows.size(); i++) {
@@ -128,10 +128,10 @@ public class ShowReportGenerator implements ObjectReportGenerator<Show> {
 			cell.setCellValue(shows.get(i).getShowName());
 			cell.setCellStyle(bodyStyle);
 			cell = row.createCell(1);
-			// cell.setCellValue(shows.get(i).getStreamingPlatform());
+			cell.setCellValue(shows.get(i).getEpisodesWatched());
 			cell.setCellStyle(bodyStyle);
 			cell = row.createCell(2);
-			// cell.setCellValue(shows.get(i).getGenre());
+			cell.setCellValue(shows.get(i).getUserRating());
 			cell.setCellStyle(bodyStyle);
 		}
 

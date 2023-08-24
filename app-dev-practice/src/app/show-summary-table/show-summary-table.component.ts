@@ -86,6 +86,7 @@ export class ShowSummaryTableComponent {
   navigateToShowInitialForm() {
     const dialogRef = this.dialog.open(ShowInitialFormComponent, {
       width: '300px',
+      data: { existingShows: this.shows },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'next') {
@@ -95,7 +96,6 @@ export class ShowSummaryTableComponent {
   }
 
   navigateToShowDetailForm(showId: any) {
-    console.log(showId);
     this.router.navigate(['shows/showDetail/', showId]);
   }
 

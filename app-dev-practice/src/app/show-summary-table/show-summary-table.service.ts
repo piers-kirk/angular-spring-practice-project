@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Show } from '../interfaces/show.interface';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ShowDetails } from '../interfaces/showDetails.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -35,10 +36,10 @@ export class ShowSummaryTableService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
-  searchShow(showName: string) {
+  searchShow(showName: string): Observable<ShowDetails> {
     const url = `https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(
       showName
     )}`;
-    return this.http.get(url);
+    return this.http.get<ShowDetails>(url);
   }
 }

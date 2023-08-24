@@ -10,9 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './menu.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { ShowModule } from '../show-summary-table/show-summary-table.module';
+import { AboutComponent } from '../about/about.component';
 
 @NgModule({
-  declarations: [MenuComponent],
+  declarations: [MenuComponent, AboutComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -5,16 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuModule } from './menu/menu.module';
 import { AppComponent } from './app.component';
 import { SignUpAndLoginComponent } from './sign-up-and-login/sign-up-and-login.component';
-import { SettingsComponent } from './settings/settings.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, SignUpAndLoginComponent, SettingsComponent],
+  declarations: [AppComponent, SignUpAndLoginComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -22,10 +23,12 @@ import { SettingsComponent } from './settings/settings.component';
     RouterModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatMenuModule,
     MatCheckboxModule,
     MatIconModule,
     HttpClientModule,
     MenuModule,
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent],
 })

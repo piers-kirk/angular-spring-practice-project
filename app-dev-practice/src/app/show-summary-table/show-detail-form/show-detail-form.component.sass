@@ -1,77 +1,70 @@
+/* Add global styles as needed */
+
+/* Styles for your specific component */
 .flex-container 
   display: flex
+  flex-direction: column
   align-items: center
   margin: 0px 10px
 
+
 .header 
-  font-size: 40px
+  font-size: 2rem
   font-weight: bold
   padding: 20px
 
-.sub-header 
-  font-size: 25px
-  font-weight: bold
-  text-align: center
-  padding: 20px
 
-.sub-sub-header 
-  font-size: 15px
-  padding: 20px
-  font-weight: bold
-  font-style: italic
-  text-align: center
-
-.row
+.row 
+  display: flex
   flex-direction: row
+  justify-content: space-between /* Add space between elements */
+  align-items: center /* Align items vertically */
 
-.left-column
-  margin: 0px 5px 0px 0px
 
-.right-column
-  margin: 0px 0px 0px 5px
-
-.use-entire-row
+.use-entire-row 
   width: 100%
-  margin: 0px 0px
+  margin: 0
 
-mat-form-field
-  width: 40vw
 
 button 
-  align-items: right
+  display: flex
+  align-items: center
+  font-size: 1rem
+  color: white
+  border: none
+  border-radius: 4px
+  cursor: pointer
+  padding: 10px 20px
+  margin: 10px
+  background-color: #2196F3
+  transition: transform 0.3s ease-in-out
+
+
+button:hover 
+  transform: scale(1.03)
+
 
 .rating-container 
   padding-top: 5px
   width: 40vw
   margin: 0px 10px
 
+
 .star 
   cursor: pointer
   color: #ccc
 
+
 .star.filled 
   color: #fdd835
 
-img
+
+img 
   display: block
-  margin-left: auto
-  margin-right: auto
+  margin: 20px auto /* Add margin for spacing */
   width: 50%
+  max-width: 100%
   border: solid 4px black
-
-.mat-expansion-panel-header 
-  display: flex
-  flex-direction: column
-  align-items: center
-  text-align: center
-
-
-.sub-header-separator 
-  margin-top: 8px
-  margin-bottom: 8px
-  height: 2px
-  background-color: #ccc
-  width: 100%
 
 
 .mat-panel-title 
@@ -79,23 +72,45 @@ img
   font-weight: bold
 
 
-.mat-panel-description 
-  font-size: 14px
+.text-counter 
+  font-size: 12px
+  color: gray
+  margin-top: 4px
 
-.centered-header 
+
+.trump-card 
   display: flex
   flex-direction: column
   align-items: center
-  text-align: center
+  width: 100%
+  padding: 20px
+  background-color: #f5f5f5
+  border-radius: 8px
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1)
+  margin-bottom: 20px
 
 
-.centered-title 
-  font-size: 20px
+.trump-card-header 
+  font-size: 18px
   font-weight: bold
-  margin-bottom: 5px
+  margin-bottom: 10px
 
 
-.centered-description 
-  font-size: 14px
-  font-style: italic
+.trump-card-body 
+  width: 100%
+
+  .trump-card-item 
+    display: flex
+    justify-content: space-between
+    margin-bottom: 10px
+  
+
+  .trump-card-label 
+    font-weight: bold
+    margin-right: 10px
+  
+
+  .trump-card-value 
+    flex-grow: 1
+  
 

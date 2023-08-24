@@ -69,7 +69,7 @@
         *matCellDef="let show"
         (click)="navigateToShowDetailForm(show.showId)"
       >
-        {{ show.dateLastWatched }}
+        {{ show.dateLastWatched !== null ? show.dateLastWatched : "N/A" }}
       </td>
     </ng-container>
     <ng-container matColumnDef="userRating">
@@ -79,7 +79,11 @@
         *matCellDef="let show"
         (click)="navigateToShowDetailForm(show.showId)"
       >
-        {{ show.userRating }}
+        {{
+          show.dateLastWatched !== null && show.userRating
+            ? show.userRating
+            : "N/A"
+        }}
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

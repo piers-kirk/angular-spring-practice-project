@@ -1,19 +1,41 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ShowSummaryTableService } from '../show-summary-table.service';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material/icon';
 import { Show } from 'src/app/interfaces/show.interface';
+import { MatTableDataSource } from '@angular/material/table';
+import { ShowDetails } from 'src/app/interfaces/showDetails.interface';
+
 @Component({
   selector: 'show-detail-form',
   templateUrl: './show-detail-form.component.html',
   styleUrls: ['./show-detail-form.component.sass'],
 })
 export class ShowDetailFormComponent implements OnInit {
+  dataSource: MatTableDataSource<ShowDetails>;
+  displayedColumns: string[] = [
+    'network',
+    'premiered',
+    'language',
+    'status',
+    'ended',
+    'type',
+    'averageRuntime',
+    'genres',
+  ];
+
+  displayDateLastWatched: boolean = false;
+
+  deserializedData: any;
+  showDetails: ShowDetails[] = [];
+
   showId: number;
   showDetailsForm: any;
+
+  minDate: Date;
+  maxDate: Date;
 
   isUpdate: boolean = false;
   errors: string[] = [];
@@ -22,12 +44,15 @@ export class ShowDetailFormComponent implements OnInit {
   ratings: number[] = [1, 2, 3, 4, 5];
   selectedRating: number;
 
+  showSavedSuccessfully = false;
+
   constructor(
+    private matIconRegistry: MatIconRegistry,
     private showSummaryTableService: ShowSummaryTableService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private matIconRegistry: MatIconRegistry
+    private cdr: ChangeDetectorRef
   ) {
     this.matIconRegistry.registerFontClassAlias('fas', 'fa');
     this.showDetailsForm = this.formBuilder.group({
@@ -40,34 +65,15 @@ export class ShowDetailFormComponent implements OnInit {
       dateLastWatched: [''],
       thoughts: [''],
       userRating: [''],
-      // below fields are set based on the data returned from the api
-      id: [{ value: '', disabled: true }], // Unique identifier for the show.
-      url: [{ value: '', disabled: true }], // URL of the show on TVmaze website.
-      name: [{ value: '', disabled: true }], // Name of the show.
-      type: [{ value: '', disabled: true }], // Type of the show (e.g., Scripted, Reality, Animation).
-      language: [{ value: '', disabled: true }], // Language of the show.
-      genres: [{ value: '', disabled: true }], // Array of genres associated with the show.
-      status: [{ value: '', disabled: true }], // Status of the show (e.g., Running, Ended).
-      runtime: [{ value: '', disabled: true }], // Duration of each episode in minutes.
-      premiered: [{ value: '', disabled: true }], // Date when the show premiered.
-      officialSite: [{ value: '', disabled: true }], // Official website of the show.
-      schedule: [{ value: '', disabled: true }], // Object containing information about the show's airing schedule.
-      rating: [{ value: '', disabled: true }], // Object containing information about the show's rating.
-      weight: [{ value: '', disabled: true }], // Weight of the show (used for sorting in search results).
-      network: [{ value: '', disabled: true }], // Object containing information about the show's network.
-      webChannel: [{ value: '', disabled: true }], //Object containing information about the show's web channel.
-      externals: [{ value: '', disabled: true }], // External IDs associated with the show (e.g., IMDb, TVmaze).
-      image: [{ value: '', disabled: true }], // Object containing URLs of images associated with the show (e.g., poster, thumbnail).
-      summary: [{ value: '', disabled: true }], // Summary or description of the show.
-      updated: [{ value: '', disabled: true }], // Last time the show's data was updated.
     });
     const storedData = localStorage.getItem('showDetails');
     if (storedData) {
-      const deserializedData = JSON.parse(storedData);
-      this.showDetailsForm.patchValue(deserializedData);
-      console.log(deserializedData);
-      this.getTextContent();
+      this.deserializedData = JSON.parse(storedData);
+      this.showDetails = [this.deserializedData];
+      this.dataSource = new MatTableDataSource<ShowDetails>(this.showDetails);
     }
+    this.minDate = new Date(this.deserializedData.premiered);
+    this.maxDate = new Date(); // Set the current date as the maximum date
   }
 
   ngOnInit() {
@@ -75,10 +81,16 @@ export class ShowDetailFormComponent implements OnInit {
       this.showId = params['showId'];
       this.isUpdate = +this.showId !== 0;
     });
-    this.createShowDetailForm();
+    this.showDetailsForm.controls.episodesWatched.valueChanges.subscribe(
+      (numberOfEpisodes: number) => {
+        console.log(numberOfEpisodes, this.displayDateLastWatched);
+        this.displayDateLastWatched = 0 < numberOfEpisodes;
+      }
+    );
+    this.createShowDetailsForm();
   }
 
-  createShowDetailForm() {
+  createShowDetailsForm() {
     const isUpdate: boolean = +this.showId !== 0;
     if (isUpdate) {
       this.showSummaryTableService.select(this.showId).subscribe((shows) => {
@@ -96,18 +108,24 @@ export class ShowDetailFormComponent implements OnInit {
         this.showSummaryTableService
           .searchShow(show.showName)
           .subscribe((data) => {
-            this.showDetailsForm.patchValue(data);
-            this.getTextContent();
+            this.deserializedData = data;
+            this.showDetails = [data];
+            this.dataSource = new MatTableDataSource<ShowDetails>(
+              this.showDetails
+            );
           });
       });
     }
   }
 
-  getTextContent() {
-    const htmlContent = this.showDetailsForm.controls.summary.value;
+  getTextContent(html: any) {
     const div = document.createElement('div');
-    div.innerHTML = htmlContent;
-    this.showDetailsForm.controls.summary.setValue(div.textContent);
+    div.innerHTML = html;
+    return div.textContent;
+  }
+
+  formatGenres(genres: any) {
+    return genres.toString().replaceAll(',', ', ');
   }
 
   selectRating(rating: number) {
@@ -120,18 +138,30 @@ export class ShowDetailFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.showDetailsForm);
     const show: Show = {
       showId: this.showDetailsForm.controls.showId.value,
-      showName: this.showDetailsForm.controls.name.value,
+      showName:
+        this.showDetailsForm.controls.name?.value || this.deserializedData.name,
       episodesWatched: this.showDetailsForm.controls.episodesWatched.value,
       dateLastWatched: this.showDetailsForm.controls.dateLastWatched.value,
       thoughts: this.showDetailsForm.controls.thoughts.value,
-      userRating: this.showDetailsForm.controls.userRating.value,
+      userRating: this.showDetailsForm.controls.userRating?.value || 0,
     };
+
     this.showSummaryTableService.save(show).subscribe({
-      next: (data: any) => {},
+      next: (data: any) => {
+        console.log('in-next');
+        this.showSavedSuccessfully = true;
+        console.log('Show saved. Variable is true.');
+
+        setTimeout(() => {
+          this.showSavedSuccessfully = false;
+          console.log('Timeout finished. Variable is now false.');
+          this.cdr.detectChanges(); // Trigger change detection
+        }, 10000);
+      },
       error: (error: HttpErrorResponse) => {
+        console.log(error);
         this.errors = error.error;
       },
     });
