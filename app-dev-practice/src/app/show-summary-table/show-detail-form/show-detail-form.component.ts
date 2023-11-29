@@ -45,6 +45,7 @@ export class ShowDetailFormComponent implements OnInit {
   selectedRating: number;
 
   showSavedSuccessfully = false;
+  clientSaveTime: Date;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -137,7 +138,20 @@ export class ShowDetailFormComponent implements OnInit {
     this.router.navigate(['shows']);
   }
 
-  onSubmit() {
+  delete() {
+    this.showSummaryTableService
+      .delete(this.showDetailsForm.controls.showId.value)
+      .subscribe({
+        next: (data: any) => {
+          this.navigateToRoute();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errors = error.error;
+        },
+      });
+  }
+
+  save() {
     const show: Show = {
       showId: this.showDetailsForm.controls.showId.value,
       showName:
@@ -150,18 +164,14 @@ export class ShowDetailFormComponent implements OnInit {
 
     this.showSummaryTableService.save(show).subscribe({
       next: (data: any) => {
-        console.log('in-next');
         this.showSavedSuccessfully = true;
-        console.log('Show saved. Variable is true.');
-
+        this.clientSaveTime = new Date();
         setTimeout(() => {
           this.showSavedSuccessfully = false;
-          console.log('Timeout finished. Variable is now false.');
-          this.cdr.detectChanges(); // Trigger change detection
+          this.cdr.detectChanges(); // trigger change detection
         }, 10000);
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
         this.errors = error.error;
       },
     });

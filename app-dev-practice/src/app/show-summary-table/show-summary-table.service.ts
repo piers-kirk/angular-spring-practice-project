@@ -21,7 +21,6 @@ export class ShowSummaryTableService {
   }
 
   save(show: any) {
-    console.log(show);
     const url = 'http://localhost:8080/show/save';
     return this.http.post<Show>(url, show);
   }
