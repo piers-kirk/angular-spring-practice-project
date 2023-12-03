@@ -9,7 +9,7 @@ import { catchError } from 'rxjs';
   providedIn: 'root',
 })
 export class ShowSummaryTableService {
-  backendUrl: String = '/backend';
+  backendUrl: String = '';
   showApi: String = 'https://api.tvmaze.com/singlesearch/shows?q=';
   constructor(private http: HttpClient) {}
 
