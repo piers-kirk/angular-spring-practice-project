@@ -11,6 +11,7 @@
 	<groupId>com.springBoot</groupId>
 	<artifactId>practiceProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>practiceProject</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -55,7 +56,7 @@
 		<dependency>
   			<groupId>org.postgresql</groupId>
   			<artifactId>postgresql</artifactId>
-</dependency>
+		</dependency>
 	</dependencies>
 
 	<build>
