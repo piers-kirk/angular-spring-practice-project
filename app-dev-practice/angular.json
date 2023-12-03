@@ -66,6 +66,9 @@
             },
             "development": {
               "browserTarget": "app-dev-practice:build:development"
+            },
+            "options": {
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
