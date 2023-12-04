@@ -1,2 +1,2 @@
-web: java -jar target/practiceProject.jar
+web: java -jar practiceProject/target/practiceProject.jar
 
