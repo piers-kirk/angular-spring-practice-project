@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS tblShows (
+    ShowID SERIAL PRIMARY KEY,
+    ShowName VARCHAR(255) NOT NULL,
+    EpisodesWatched INT NOT NULL,
+    DateLastWatched DATE,
+    Thoughts TEXT,
+    UserRating INT NOT NULL DEFAULT 0
+);
+
+-- Add any additional constraints or defaults as needed
+
+-- For example:
+-- ALTER TABLE tblShows ADD CONSTRAINT pk_tblShows PRIMARY KEY (ShowID);
+
+-- For example:
+-- ALTER TABLE tblShows ALTER COLUMN EpisodesWatched SET DEFAULT 0;
+-- ALTER TABLE tblShows ALTER COLUMN UserRating SET DEFAULT 0;
+
+INSERT INTO tblShows (ShowName, EpisodesWatched, DateLastWatched, Thoughts, UserRating) VALUES 
+    ('Euphoria', 8, '2023-07-01', 'Intense!', 1),
+    ('Breaking Bad', 16, '2023-07-02', 'Wow!', 2),
+    ('Big Time Rush', 32, '2023-07-03', '#Throwback', 3),
+    ('The Last of Us', 64, '2023-07-04', 'Need to play the games again now!', 4),
+    ('Succession', 128, '2023-07-05', 'Cool!', 5),
+    ('SpongeBob SquarePants', 256, '2023-07-06', 'Love it!', 4),
+    ('Fear the Walking Dead', 512, '2023-07-07', 'Scary!', 3),
+    ('American Horror Story', 1024, '2023-07-08', 'Super Scary!', 2),
+    ('Rick and Morty', 2048, '2023-07-09', 'Pickle Rickkkkk!', 1);
+
+SELECT * FROM tblShows;

@@ -21,17 +21,17 @@ public class ShowService extends ObjectService<Show, ShowForm> {
 
 	@Override
 	public List<Show> select(long showId) {
-		return jdbcTemplate.query(env.getProperty("repository.show.query.select"), showRowMapper, new Object[] { showId });
+		return jdbcTemplate.query(env.getProperty("repository.tblShow.query.select"), showRowMapper, new Object[] { showId });
 	}
 
 	@Override
 	public List<Show> selectAll() {
-		return jdbcTemplate.query(env.getProperty("repository.show.query.selectAll"), showRowMapper);
+		return jdbcTemplate.query(env.getProperty("repository.tblShow.query.selectAll"), showRowMapper);
 	}
 
 	@Override
 	public int insert(ShowForm showForm) {
-		return jdbcTemplate.update(env.getProperty("repository.show.query.insert"),
+		return jdbcTemplate.update(env.getProperty("repository.tblShow.query.insert"),
 				new Object[] { showForm.getShowName(), 
 						showForm.getEpisodesWatched(), 
 						showForm.getDateLastWatched(),
@@ -42,7 +42,7 @@ public class ShowService extends ObjectService<Show, ShowForm> {
 
 	@Override
 	public int update(ShowForm showForm) {
-		return jdbcTemplate.update(env.getProperty("repository.show.query.update"), 				
+		return jdbcTemplate.update(env.getProperty("repository.tblShow.query.update"), 				
 				new Object[] { showForm.getShowName(), 
 				showForm.getEpisodesWatched(), 
 				showForm.getDateLastWatched(),				
@@ -56,7 +56,7 @@ public class ShowService extends ObjectService<Show, ShowForm> {
 	public int delete(List<Long> showIds) {
 		int i = 0;
 		for (; i < showIds.size(); i++) {
-			jdbcTemplate.update(env.getProperty("repository.show.query.delete"), new Object[] { showIds.get(i) });
+			jdbcTemplate.update(env.getProperty("repository.tblShow.query.delete"), new Object[] { showIds.get(i) });
 		}
 		return i;
 	}
