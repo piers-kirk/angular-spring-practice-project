@@ -1,1 +1,2 @@
-web: java --war target/practiceProject.war
+web: java -jar target/practiceProject.jar
+
