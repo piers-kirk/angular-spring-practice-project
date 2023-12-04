@@ -8,7 +8,6 @@
 	<version>3.1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>app-dev-practice</module>
         <module>practiceProject</module>
     </modules>
 </project>
