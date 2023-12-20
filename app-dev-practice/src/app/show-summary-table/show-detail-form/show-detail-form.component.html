@@ -28,40 +28,58 @@
         <div class="trump-card-body">
           <div class="trump-card-item">
             <div class="trump-card-label">Network:</div>
-            <div class="trump-card-value">{{ show.network.name }}</div>
+            <div class="trump-card-value">
+              {{
+                show && show.network && show.network.name
+                  ? show.network.name
+                  : "N/A"
+              }}
+            </div>
           </div>
           <div class="trump-card-item">
             <div class="trump-card-label">Premiered:</div>
-            <div class="trump-card-value">{{ show.premiered }}</div>
+            <div class="trump-card-value">
+              {{ show && show.premiered ? show.premiered : "N/A" }}
+            </div>
           </div>
           <div class="trump-card-item">
             <div class="trump-card-label">Language:</div>
-            <div class="trump-card-value">{{ show.language }}</div>
+            <div class="trump-card-value">
+              {{ show && show.language ? show.language : "N/A" }}
+            </div>
           </div>
           <div class="trump-card-item">
             <div class="trump-card-label">Status:</div>
-            <div class="trump-card-value">{{ show.status }}</div>
+            <div class="trump-card-value">
+              {{ show && show.status ? show.status : "N/A" }}
+            </div>
           </div>
           <div class="trump-card-item">
             <div class="trump-card-label">Ended:</div>
             <div class="trump-card-value">
-              {{ show.status === "Running" ? "N/A" : show.ended }}
+              {{
+                show && show.status && show.status === "Running"
+                  ? "N/A"
+                  : show.ended
+              }}
             </div>
           </div>
           <div class="trump-card-item">
             <div class="trump-card-label">Type:</div>
-            <div class="trump-card-value">{{ show.type }}</div>
+            <div class="trump-card-value">
+              {{ show && show.type ? show.type : "N/A" }}
+            </div>
           </div>
           <div class="trump-card-item">
             <div class="trump-card-label">Average Runtime (Minutes):</div>
             <div class="trump-card-value">
-              {{ show.averageRuntime }}
+              {{ show && show.type ? show.averageRuntime : "N/A" }}
             </div>
           </div>
           <div class="trump-card-item">
             <div class="trump-card-label">Genres:</div>
             <div class="trump-card-value">
-              {{ formatGenres(show.genres) }}
+              {{ show && show.genres ? formatGenres(show.genres) : "N/A" }}
             </div>
           </div>
         </div>
