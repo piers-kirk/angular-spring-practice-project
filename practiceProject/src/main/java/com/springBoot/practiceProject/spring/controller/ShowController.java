@@ -28,7 +28,7 @@ import com.springBoot.practiceProject.spring.service.ShowService;
 import com.springBoot.practiceProject.validator.ShowFormValidator;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://piers-spring-boot-angular-app-0ee01eb060c2.herokuapp.com"})
 @RequestMapping("show/")
 public class ShowController {
 

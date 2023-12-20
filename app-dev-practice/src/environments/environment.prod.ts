@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://git.heroku.com/piers-spring-boot-angular-app',
+  apiUrl: 'https://piers-spring-boot-angular-app-0ee01eb060c2.herokuapp.com',
 };
