@@ -4,12 +4,12 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ShowDetails } from '../interfaces/showDetails.interface';
 import { catchError } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class ShowSummaryTableService {
-  backendUrl: String = '';
+  backendUrl: String = environment.apiUrl;
   showApi: String = 'https://api.tvmaze.com/singlesearch/shows?q=';
   constructor(private http: HttpClient) {}
 
