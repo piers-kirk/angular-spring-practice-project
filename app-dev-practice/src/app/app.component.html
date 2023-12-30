@@ -1,1 +1,30 @@
-<router-outlet></router-outlet>
+<body>
+  <ul>
+    <li [id]="selectedButtonId === 'home' ? 'selected' : ''">
+      <button mat-button (click)="navigateToHome()">
+        <mat-icon>home</mat-icon>Home
+      </button>
+    </li>
+    <li [id]="selectedButtonId === 'about' ? 'selected' : ''">
+      <button mat-button (click)="navigateToAbout()">
+        <mat-icon>person</mat-icon>About
+      </button>
+    </li>
+    <li [id]="selectedButtonId === 'portfolio' ? 'selected' : ''">
+      <button mat-button (click)="navigateToPortfolio()">
+        <mat-icon>library_books</mat-icon>Portfolio
+      </button>
+    </li>
+    <li [id]="selectedButtonId === 'contact' ? 'selected' : ''">
+      <button mat-button (click)="navigateToContact()">
+        <mat-icon>mail</mat-icon>Contact
+      </button>
+    </li>
+    <li id="right-align-timestamp">Last Updated: {{ lastUpdateDate }}</li>
+  </ul>
+  <div class="parallax-section home"></div>
+  <div class="parallax-section about"></div>
+  <div class="parallax-section portfolio"></div>
+  <div class="parallax-section contact"></div>
+  <router-outlet></router-outlet>
+</body>

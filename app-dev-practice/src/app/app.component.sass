@@ -1,0 +1,60 @@
+ul, li
+  margin: 0
+  padding: 0
+  list-style-type: none
+
+ul
+  overflow: hidden
+  background-color: rgb(255, 216, 183)
+  position: fixed
+  top: 0
+  width: 100%
+  display: flex
+  justify-content: space-around  // Updated to space-around
+  z-index: 2
+  border-bottom: 1px solid rgb(0, 0, 0)
+
+li
+  display: flex
+  align-items: center
+  padding: 1.5em 2em
+  border-left: 1px solid rgb(0, 0, 0)
+  border-right: 1px solid rgb(0, 0, 0)
+
+  &:hover
+    background-color: rgb(255, 200, 0)
+
+#selected
+  background-color: rgb(255, 255, 183)
+  border-bottom: none
+
+#right-align-timestamp
+  text-align: right
+  margin-left: auto  // Added margin-left: auto
+  background-color: rgb(255, 255, 255)
+
+.parallax-section
+  height: 100vh
+  display: flex
+  align-items: center
+  justify-content: center
+  color: white
+  font-size: 2em
+  text-align: center
+  position: relative
+  background-attachment: fixed
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
+
+  &.home
+    background-image: url('../assets/logo.png')
+
+  &.about
+    background-image: url('../assets/welcome.jpg')
+
+  &.portfolio
+    background-image: url('../assets/logo.png')
+  
+  &.contact
+    background-image: url('../assets/welcome.jpg')
