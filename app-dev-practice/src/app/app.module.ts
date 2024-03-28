@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCheckboxModule,
     MatIconModule,
     HttpClientModule,
+    RouterModule,
     MenuModule,
     BrowserAnimationsModule,
   ],
