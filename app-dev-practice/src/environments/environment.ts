@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
+  backendApi: 'http://localhost:8080',
+  tvMazeApi: 'https://api.tvmaze.com/singlesearch/shows?q=',
 };

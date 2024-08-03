@@ -12,5 +12,4 @@ export interface ShowDetails {
   genres: string[];
   officialSite: string;
   summary: string;
-  // Add any other properties that are present in the API response
 }

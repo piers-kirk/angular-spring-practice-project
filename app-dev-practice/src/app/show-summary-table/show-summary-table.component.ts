@@ -69,7 +69,7 @@ export class ShowSummaryTableComponent {
         const blobURL = URL.createObjectURL(response);
         const a = document.createElement('a');
         a.href = blobURL;
-        a.download = 'shows.xlsx'; // Specify the desired filename
+        a.download = 'shows.xlsx';
         a.target = '_blank';
         a.click();
       },

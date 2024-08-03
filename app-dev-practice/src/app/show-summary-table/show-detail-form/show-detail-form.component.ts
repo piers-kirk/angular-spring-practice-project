@@ -74,7 +74,7 @@ export class ShowDetailFormComponent implements OnInit {
       this.dataSource = new MatTableDataSource<ShowDetails>(this.showDetails);
     }
     this.minDate = new Date(this.deserializedData.premiered);
-    this.maxDate = new Date(); // Set the current date as the maximum date
+    this.maxDate = new Date();
   }
 
   ngOnInit() {
@@ -135,7 +135,7 @@ export class ShowDetailFormComponent implements OnInit {
   }
 
   navigateToRoute() {
-    this.router.navigate(['shows']);
+    this.router.navigate(['']);
   }
 
   delete() {

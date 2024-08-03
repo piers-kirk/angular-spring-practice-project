@@ -1,10 +1,5 @@
 <body>
   <div id="delete-and-export">
-    <span class="left-align">
-      <!-- <button mat-button (click)="navigateToRoute()">
-        <mat-icon>arrow_back</mat-icon>Back
-      </button> -->
-    </span>
     <span class="right-align">
       <button mat-button (click)="deleteShows()">
         <mat-icon>delete</mat-icon>Delete
@@ -17,7 +12,6 @@
       </button>
     </span>
   </div>
-
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>

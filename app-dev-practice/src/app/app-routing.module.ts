@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { SignUpAndLoginComponent } from './sign-up-and-login/sign-up-and-login.component';
-import { MenuComponent } from './menu/menu.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ShowSummaryTableComponent } from './show-summary-table/show-summary-table.component';
 
-const routes: Routes = [
-  { path: 'home', component: SignUpAndLoginComponent },
-  { path: 'menu', component: MenuComponent },
-  { path: '', redirectTo: 'menu', pathMatch: 'full' },
-];
+const routes: Routes = [{ path: '', component: ShowSummaryTableComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

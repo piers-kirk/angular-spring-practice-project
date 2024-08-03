@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ShowSummaryTableService {
-  backendUrl: String = environment.apiUrl;
-  showApi: String = 'https://api.tvmaze.com/singlesearch/shows?q=';
+  backendUrl: String = environment.backendApi;
+  showApi: String = environment.tvMazeApi;
   constructor(private http: HttpClient) {}
 
   select(showId: any): Observable<Show[]> {
