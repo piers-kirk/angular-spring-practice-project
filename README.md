@@ -8,7 +8,7 @@
   
   Thank you for taking the time to check out my application! I have several enhancements planned for this project, primarily focusing on backend tasks such as adding authentication and authorization with Spring Security.
   
-  I created this project independently but frequently used ChatGPT to accelerate development and learn new topics, such as backend server configuration. I am using the freely available TV MAZE API to populate the show data. You can find more information about this API <a href="[url](https://www.tvmaze.com/api#show-search)">here</a>.
+  I created this project independently but frequently used ChatGPT to accelerate development and learn new topics, such as backend server configuration. I am using the freely available TV MAZE API to populate the show data. You can find more information about this API [here](https://www.tvmaze.com/api#show-search).
 </p>
 
 <h3>Application Screenshots:</h3>
