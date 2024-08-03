@@ -7,6 +7,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { Show } from 'src/app/interfaces/show.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { ShowDetails } from 'src/app/interfaces/showDetails.interface';
+import { dateNotFutureValidator } from 'src/app/validators/date-not-future.validator';
 
 @Component({
   selector: 'show-detail-form',
@@ -61,9 +62,13 @@ export class ShowDetailFormComponent implements OnInit {
       showName: [''],
       episodesWatched: [
         null,
-        [Validators.required, Validators.pattern('^[0-9]+$')],
+        [
+          Validators.required,
+          Validators.max(10000),
+          Validators.pattern('^[0-9]+$'),
+        ],
       ],
-      dateLastWatched: [''],
+      dateLastWatched: [null, [dateNotFutureValidator()]],
       thoughts: [''],
       userRating: [''],
     });
@@ -84,7 +89,6 @@ export class ShowDetailFormComponent implements OnInit {
     });
     this.showDetailsForm.controls.episodesWatched.valueChanges.subscribe(
       (numberOfEpisodes: number) => {
-        console.log(numberOfEpisodes, this.displayDateLastWatched);
         this.displayDateLastWatched = 0 < numberOfEpisodes;
       }
     );
@@ -114,9 +118,17 @@ export class ShowDetailFormComponent implements OnInit {
             this.dataSource = new MatTableDataSource<ShowDetails>(
               this.showDetails
             );
+            this.triggerValidation();
           });
       });
     }
+  }
+
+  triggerValidation(): void {
+    Object.keys(this.showDetailsForm.controls).forEach((field) => {
+      const control = this.showDetailsForm.get(field);
+      control.markAsTouched({ onlySelf: true });
+    });
   }
 
   getTextContent(html: any) {
@@ -152,28 +164,30 @@ export class ShowDetailFormComponent implements OnInit {
   }
 
   save() {
-    const show: Show = {
-      showId: this.showDetailsForm.controls.showId.value,
-      showName:
-        this.showDetailsForm.controls.name?.value || this.deserializedData.name,
-      episodesWatched: this.showDetailsForm.controls.episodesWatched.value,
-      dateLastWatched: this.showDetailsForm.controls.dateLastWatched.value,
-      thoughts: this.showDetailsForm.controls.thoughts.value,
-      userRating: this.showDetailsForm.controls.userRating?.value || 0,
-    };
-
-    this.showSummaryTableService.save(show).subscribe({
-      next: (data: any) => {
-        this.showSavedSuccessfully = true;
-        this.clientSaveTime = new Date();
-        setTimeout(() => {
-          this.showSavedSuccessfully = false;
-          this.cdr.detectChanges(); // trigger change detection
-        }, 10000);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errors = error.error;
-      },
-    });
+    if (this.showDetailsForm.valid) {
+      const show: Show = {
+        showId: this.showDetailsForm.controls.showId.value,
+        showName:
+          this.showDetailsForm.controls.name?.value ||
+          this.deserializedData.name,
+        episodesWatched: this.showDetailsForm.controls.episodesWatched.value,
+        dateLastWatched: this.showDetailsForm.controls.dateLastWatched.value,
+        thoughts: this.showDetailsForm.controls.thoughts.value,
+        userRating: this.showDetailsForm.controls.userRating?.value || 0,
+      };
+      this.showSummaryTableService.save(show).subscribe({
+        next: () => {
+          this.showSavedSuccessfully = true;
+          this.clientSaveTime = new Date();
+          setTimeout(() => {
+            this.showSavedSuccessfully = false;
+            this.cdr.detectChanges();
+          }, 10000);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errors = error.error;
+        },
+      });
+    }
   }
 }

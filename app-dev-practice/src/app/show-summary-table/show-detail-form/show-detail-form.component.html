@@ -93,7 +93,7 @@
       </ul>
     </div>
     <mat-card-content>
-      <div *ngIf="showSavedSuccessfully">
+      <div id="success-message" *ngIf="showSavedSuccessfully">
         Record successfully saved at {{ clientSaveTime }}
       </div>
       <form [formGroup]="showDetailsForm" class="text-center">
@@ -107,8 +107,15 @@
               required
             />
             <mat-label>Episodes Watched:</mat-label>
-            <mat-error *ngIf="showDetailsForm.controls.episodesWatched.invalid">
-              Please enter a non-negative integer.
+            <mat-error
+              *ngIf="showDetailsForm.controls.episodesWatched.errors?.pattern"
+            >
+              Episodes Watched must be a non-negative integer.
+            </mat-error>
+            <mat-error
+              *ngIf="showDetailsForm.controls.episodesWatched.errors?.max"
+            >
+              Episodes Watched cannot be greater than 10,000.
             </mat-error>
           </mat-form-field>
         </div>
@@ -123,6 +130,13 @@
             />
             <mat-label>Date Last Watched:</mat-label>
             <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-error
+              *ngIf="
+                showDetailsForm.controls.dateLastWatched.errors?.dateNotFuture
+              "
+            >
+              Date Last Watched cannot be in the future.
+            </mat-error>
             <mat-datepicker-toggle
               matSuffix
               [for]="picker"
@@ -160,7 +174,12 @@
               <mat-icon>delete</mat-icon>Delete
             </button>
           </ng-container>
-          <button (click)="save()" mat-button>
+          <button
+            (click)="save()"
+            [disabled]="showDetailsForm.invalid"
+            [ngClass]="{ 'button-disabled': showDetailsForm.invalid }"
+            mat-button
+          >
             <mat-icon>save</mat-icon>Save
           </button>
         </span>
