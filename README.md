@@ -21,4 +21,10 @@
   <img width="1512" alt="Show Detail Form" src="https://github.com/user-attachments/assets/ab23990a-23f6-4b67-88cf-e839cc2cf57d">
 </p>
 
+<h3>Future Tasks:</h3>
+<ul>
+  <li>If the user clicks the update button after an initial record creation, a duplicate record is created in the database.</li>
+  <li>The Update and Delete buttons should appear on the same line.</li>
+</ul>  
+
 
