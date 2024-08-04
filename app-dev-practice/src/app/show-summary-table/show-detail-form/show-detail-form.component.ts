@@ -78,7 +78,11 @@ export class ShowDetailFormComponent implements OnInit {
       this.showDetails = [this.deserializedData];
       this.dataSource = new MatTableDataSource<ShowDetails>(this.showDetails);
     }
-    this.minDate = new Date(this.deserializedData.premiered);
+    if (this.deserializedData.premiered) {
+      const premiereDate = new Date(this.deserializedData.premiered);
+      premiereDate.setDate(premiereDate.getDate() + 1);
+      this.minDate = premiereDate;
+    }
     this.maxDate = new Date();
   }
 
@@ -96,8 +100,8 @@ export class ShowDetailFormComponent implements OnInit {
   }
 
   createShowDetailsForm() {
-    const isUpdate: boolean = +this.showId !== 0;
-    if (isUpdate) {
+    this.isUpdate = +this.showId !== 0;
+    if (this.isUpdate) {
       this.showSummaryTableService.select(this.showId).subscribe((shows) => {
         const show = shows[0];
         const updatedValues = {
@@ -177,6 +181,7 @@ export class ShowDetailFormComponent implements OnInit {
       };
       this.showSummaryTableService.save(show).subscribe({
         next: () => {
+          this.isUpdate = true;
           this.showSavedSuccessfully = true;
           this.clientSaveTime = new Date();
           setTimeout(() => {

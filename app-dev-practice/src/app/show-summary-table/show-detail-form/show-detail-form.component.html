@@ -106,7 +106,7 @@
               formControlName="episodesWatched"
               required
             />
-            <mat-label>Episodes Watched:</mat-label>
+            <mat-label>Number of Episodes Watched:</mat-label>
             <mat-error
               *ngIf="showDetailsForm.controls.episodesWatched.errors?.pattern"
             >
@@ -147,7 +147,7 @@
         <br />
         <div class="row">
           <mat-form-field class="use-entire-row">
-            <mat-label>Thoughts:</mat-label>
+            <mat-label>Comments:</mat-label>
             <textarea
               matInput
               maxlength="2000"
@@ -180,7 +180,7 @@
             [ngClass]="{ 'button-disabled': showDetailsForm.invalid }"
             mat-button
           >
-            <mat-icon>save</mat-icon>Save
+            <mat-icon>save</mat-icon>{{ isUpdate ? "Update" : "Create" }}
           </button>
         </span>
       </div>

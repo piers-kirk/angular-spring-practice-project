@@ -1,86 +1,100 @@
 <body>
-  <div id="delete-and-export">
-    <span class="right-align">
-      <button mat-button (click)="deleteShows()">
-        <mat-icon>delete</mat-icon>Delete
-      </button>
-      <button mat-button (click)="navigateToShowInitialForm()">
-        <mat-icon>add_box</mat-icon>Add
-      </button>
-      <button mat-button (click)="exportShows()">
-        <mat-icon>print</mat-icon>Export
-      </button>
-    </span>
+  <div
+    *ngIf="dataSource.data.length === 0; else recordsExist"
+    class="no-records-message scale-up-by-3"
+  >
+    <p>No records found.</p>
+    <p>Click the button below to add a new record.</p>
+    <button mat-button (click)="navigateToShowInitialForm()">
+      <mat-icon>add_box</mat-icon>Add
+    </button>
   </div>
-  <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox
-          (change)="$event ? masterToggle() : null"
-          [checked]="selection.hasValue() && isAllSelected()"
-          [indeterminate]="selection.hasValue() && !isAllSelected()"
-        >
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-checkbox
-          (click)="$event.stopPropagation()"
-          (change)="$event ? selection.toggle(row) : null"
-          [checked]="selection.isSelected(row)"
-        >
-        </mat-checkbox>
-      </td>
-    </ng-container>
+  <ng-template #recordsExist>
+    <div id="delete-and-export">
+      <span class="right-align">
+        <button mat-button (click)="deleteShows()">
+          <mat-icon>delete</mat-icon>Delete
+        </button>
+        <button mat-button (click)="navigateToShowInitialForm()">
+          <mat-icon>add_box</mat-icon>Add
+        </button>
+        <button mat-button (click)="exportShows()">
+          <mat-icon>print</mat-icon>Export
+        </button>
+      </span>
+    </div>
+    <div id="show-summary-table">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
 
-    <ng-container matColumnDef="showName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Show Name</th>
-      <td
-        mat-cell
-        *matCellDef="let show"
-        (click)="navigateToShowDetailForm(show.showId)"
-      >
-        {{ show.showName }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="episodesWatched">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Episodes Watched
-      </th>
-      <td
-        mat-cell
-        *matCellDef="let show"
-        (click)="navigateToShowDetailForm(show.showId)"
-      >
-        {{ show.episodesWatched }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="dateLastWatched">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Date Last Watched
-      </th>
-      <td
-        mat-cell
-        *matCellDef="let show"
-        (click)="navigateToShowDetailForm(show.showId)"
-      >
-        {{ show.dateLastWatched !== null ? show.dateLastWatched : "N/A" }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="userRating">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
-      <td
-        mat-cell
-        *matCellDef="let show"
-        (click)="navigateToShowDetailForm(show.showId)"
-      >
-        {{
-          show.dateLastWatched !== null && show.userRating
-            ? show.userRating
-            : "N/A"
-        }}
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+        <ng-container matColumnDef="showName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Show Name</th>
+          <td
+            mat-cell
+            *matCellDef="let show"
+            (click)="navigateToShowDetailForm(show.showId)"
+          >
+            {{ show.showName }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="episodesWatched">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Episodes Watched
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let show"
+            (click)="navigateToShowDetailForm(show.showId)"
+          >
+            {{ show.episodesWatched }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="dateLastWatched">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Date Last Watched
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let show"
+            (click)="navigateToShowDetailForm(show.showId)"
+          >
+            {{ show.dateLastWatched !== null ? show.dateLastWatched : "N/A" }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="userRating">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+          <td
+            mat-cell
+            *matCellDef="let show"
+            (click)="navigateToShowDetailForm(show.showId)"
+          >
+            {{
+              show.dateLastWatched !== null && show.userRating
+                ? show.userRating
+                : "N/A"
+            }}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </ng-template>
 </body>
