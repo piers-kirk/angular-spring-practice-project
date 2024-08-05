@@ -1,21 +1,23 @@
 <mat-card id="flex-container">
   <mat-card-header class="title"> Show Form </mat-card-header>
   <div *ngIf="errors && errors.length > 0" class="error-messages">
-    <ul>
-      <li *ngFor="let error of errors">{{ error }}</li>
-    </ul>
+    <div *ngFor="let error of errors" class="error-message">
+      {{ error }}
+    </div>
   </div>
   <br />
   <mat-card-content>
     <form [formGroup]="showDetailsForm" class="center-text">
-      <mat-form-field>
+      <mat-form-field class="form-field-container">
         <mat-label>Show Name:</mat-label>
         <input
+          id="show-name-input-field"
           matInput
           type="text"
           id="showName"
           formControlName="showName"
           required
+          (change)="onShowNameChange($event)"
         />
       </mat-form-field>
       <br />

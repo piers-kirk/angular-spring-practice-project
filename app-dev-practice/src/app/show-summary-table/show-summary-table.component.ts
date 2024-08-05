@@ -85,7 +85,7 @@ export class ShowSummaryTableComponent {
 
   navigateToShowInitialForm() {
     const dialogRef = this.dialog.open(ShowInitialFormComponent, {
-      width: '300px',
+      maxWidth: '30vw',
       data: { existingShows: this.shows },
     });
     dialogRef.afterClosed().subscribe((result) => {

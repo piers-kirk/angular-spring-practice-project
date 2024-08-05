@@ -12,23 +12,36 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./show-initial-form.component.sass'],
 })
 export class ShowInitialFormComponent {
+  existingShows: Show[];
   errors: string[] = [];
-  showDetailsForm: any;
+  showDetailsForm = this.formBuilder.group({
+    showName: ['', Validators.required],
+  });
   lockNext: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     public dialogRef: MatDialogRef<ShowInitialFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public existingShows: Show[]
+    @Inject(MAT_DIALOG_DATA) public data: { existingShows: Show[] }
   ) {
-    this.showDetailsForm = this.formBuilder.group({
-      showName: [''],
-    });
+    this.existingShows = data.existingShows;
+  }
+
+  showExists(input: string): boolean {
+    return this.existingShows.some(
+      (existingShow) =>
+        existingShow.showName.trim().toLowerCase() ===
+        input.trim().toLowerCase()
+    );
+  }
+
+  resizeDialog(width: string, height: string): void {
+    this.dialogRef.updateSize(width, height);
   }
 
   ngOnInit() {
-    this.onShowNameChange();
+    this.lockNext = true;
   }
 
   searchShow(showName: string) {
@@ -38,33 +51,48 @@ export class ShowInitialFormComponent {
     return this.http.get(url);
   }
 
-  onShowNameChange() {
-    this.showDetailsForm.get('showName').valueChanges.subscribe({
-      next: (showName: any) => {
-        this.searchShow(showName).subscribe({
-          next: (response: any) => {
-            let showAlreadyExists = false;
-            showAlreadyExists =
-              Array.isArray(this.existingShows) &&
-              this.existingShows.some(
-                (existingShow) => existingShow.showName === response['showName']
-              );
-            if (!showAlreadyExists) {
-              localStorage.setItem('showDetails', JSON.stringify(response));
-              this.lockNext = false;
-            }
-          },
-          error: (error: HttpErrorResponse) => {
-            this.errors = error.error;
+  onShowNameChange(event: any) {
+    const showName = event.target.value?.trim() || '';
+    if (this.inputIsBlank(showName)) {
+      this.searchShow(showName).subscribe({
+        next: (response: any) => {
+          if (!this.showIsDuplicated(showName)) {
+            localStorage.setItem('showDetails', JSON.stringify(response));
+            this.lockNext = false;
+          } else {
             this.lockNext = true;
-          },
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errors = error.error;
-        this.lockNext = true;
-      },
-    });
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errors = ['An error occurred while searching for the show.'];
+          this.lockNext = true;
+        },
+      });
+    } else {
+      this.lockNext = true;
+    }
+  }
+
+  inputIsBlank(showName: string): boolean {
+    if (!showName) {
+      this.errors = ['Show Name cannot be blank.'];
+      return false;
+    } else {
+      this.errors = [];
+      return true;
+    }
+  }
+
+  showIsDuplicated(showName: string): boolean {
+    if (this.showExists(showName)) {
+      this.errors = [
+        'This show already exists. Please search for another show or update this show by selecting it from the table.',
+      ];
+      return true;
+    } else {
+      this.errors = [];
+      return false;
+    }
   }
 
   onCancelClick(): void {

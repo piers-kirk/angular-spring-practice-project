@@ -6,3 +6,7 @@ export interface Show {
   thoughts: string;
   userRating: number;
 }
+
+export interface ExistingShowsObject {
+  existingShows: Show[];
+}

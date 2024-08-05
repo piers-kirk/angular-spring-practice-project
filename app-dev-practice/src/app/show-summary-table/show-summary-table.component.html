@@ -1,6 +1,9 @@
 <body>
   <div
-    *ngIf="dataSource.data.length === 0; else recordsExist"
+    *ngIf="
+      dataSource && dataSource.data && dataSource.data.length === 0;
+      else recordsExist
+    "
     class="no-records-message scale-up-by-3"
   >
     <p>No records found.</p>

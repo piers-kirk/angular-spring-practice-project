@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-  public title: string = 'Shows and Films Tracker';
+  public title: string = 'Show Tracker';
 
   constructor(private titleService: Title) {}
 
