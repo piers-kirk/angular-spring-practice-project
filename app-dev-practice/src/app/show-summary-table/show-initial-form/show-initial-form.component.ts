@@ -64,7 +64,7 @@ export class ShowInitialFormComponent {
           }
         },
         error: (error: HttpErrorResponse) => {
-          this.errors = ['An error occurred while searching for the show.'];
+          this.errors = [];
           this.lockNext = true;
         },
       });
