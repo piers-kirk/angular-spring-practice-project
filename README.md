@@ -23,7 +23,7 @@
 
 <h3>Future Tasks:</h3>
 <ul>
-  <li>Improve layout of Show Detail Form, e.g. the Update and Delete buttons should appear on the same line.</li>
+  <li>Update form so the full error message displays; currently, it gets cut off.</li>
   <li>Update README with build and deployment instructions.</li>
 </ul>  
 
