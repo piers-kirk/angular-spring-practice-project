@@ -23,8 +23,7 @@
 
 <h3>Future Tasks:</h3>
 <ul>
-  <li>If the user clicks the update button after an initial record creation, a duplicate record is created in the database.</li>
-  <li>The Update and Delete buttons should appear on the same line.</li>
+  <li>Improve layout of Show Detail Form, e.g. the Update and Delete buttons should appear on the same line.</li>
   <li>Update README with build and deployment instructions.</li>
 </ul>  
 
