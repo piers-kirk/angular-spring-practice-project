@@ -7,189 +7,201 @@
           : deserializedData.name
       }}
     </mat-card-title>
-    <mat-card-subtitle> </mat-card-subtitle>
+
     <div class="row">
       <mat-icon
-        class="rating-container"
         *ngFor="let rating of ratings"
-        class="star"
+        class="rating-container star"
         (click)="selectRating(rating)"
         [ngClass]="{ filled: rating <= selectedRating }"
-        >star
+      >
+        star
       </mat-icon>
     </div>
-    <div class="row" style="padding: 20px 20px; text-align: center">
-      <em>{{ getTextContent(deserializedData.summary) }}</em>
-    </div>
-    <br />
-    <div class="trump-card-container">
-      <div class="trump-card" *ngFor="let show of showDetails">
-        <div class="trump-card-header">Details</div>
-        <div class="trump-card-body">
-          <div class="trump-card-item">
-            <div class="trump-card-label">Network:</div>
-            <div class="trump-card-value">
-              {{
-                show && show.network && show.network.name
-                  ? show.network.name
-                  : "N/A"
-              }}
-            </div>
-          </div>
-          <div class="trump-card-item">
-            <div class="trump-card-label">Premiered:</div>
-            <div class="trump-card-value">
-              {{ show && show.premiered ? show.premiered : "N/A" }}
-            </div>
-          </div>
-          <div class="trump-card-item">
-            <div class="trump-card-label">Language:</div>
-            <div class="trump-card-value">
-              {{ show && show.language ? show.language : "N/A" }}
-            </div>
-          </div>
-          <div class="trump-card-item">
-            <div class="trump-card-label">Status:</div>
-            <div class="trump-card-value">
-              {{ show && show.status ? show.status : "N/A" }}
-            </div>
-          </div>
-          <div class="trump-card-item">
-            <div class="trump-card-label">Ended:</div>
-            <div class="trump-card-value">
-              {{
-                show && show.status && show.status === "Running"
-                  ? "N/A"
-                  : show.ended
-              }}
-            </div>
-          </div>
-          <div class="trump-card-item">
-            <div class="trump-card-label">Type:</div>
-            <div class="trump-card-value">
-              {{ show && show.type ? show.type : "N/A" }}
-            </div>
-          </div>
-          <div class="trump-card-item">
-            <div class="trump-card-label">Average Runtime (Minutes):</div>
-            <div class="trump-card-value">
-              {{ show && show.type ? show.averageRuntime : "N/A" }}
-            </div>
-          </div>
-          <div class="trump-card-item">
-            <div class="trump-card-label">Genres:</div>
-            <div class="trump-card-value">
-              {{ show && show.genres ? formatGenres(show.genres) : "N/A" }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <br />
-    <div *ngIf="errors.length > 0" class="error-messages">
+    <div id="success-message" *ngIf="showSavedSuccessfully">
+      Record successfully saved at {{ clientSaveTime }}
+    </div>
+    <div class="error-messages" *ngIf="errors.length > 0">
       <ul>
         <li *ngFor="let error of errors">{{ error }}</li>
       </ul>
     </div>
-    <mat-card-content>
-      <div id="success-message" *ngIf="showSavedSuccessfully">
-        Record successfully saved at {{ clientSaveTime }}
-      </div>
-      <form [formGroup]="showDetailsForm" class="text-center">
-        <div class="row">
-          <mat-form-field class="use-entire-row">
-            <input
-              matInput
-              type="number"
-              id="episodesWatched"
-              formControlName="episodesWatched"
-              required
-            />
-            <mat-label>Number of Episodes Watched:</mat-label>
-            <mat-error
-              *ngIf="showDetailsForm.controls.episodesWatched.errors?.pattern"
-            >
-              Episodes Watched must be a non-negative integer.
-            </mat-error>
-            <mat-error
-              *ngIf="showDetailsForm.controls.episodesWatched.errors?.max"
-            >
-              Episodes Watched cannot be greater than 10,000.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field class="use-entire-row" *ngIf="displayDateLastWatched">
-            <input
-              matInput
-              [matDatepicker]="picker"
-              formControlName="dateLastWatched"
-              [min]="minDate"
-              [max]="maxDate"
-            />
-            <mat-label>Date Last Watched:</mat-label>
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-error
-              *ngIf="
-                showDetailsForm.controls.dateLastWatched.errors?.dateNotFuture
-              "
-            >
-              Date Last Watched cannot be in the future.
-            </mat-error>
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <br />
-        <div class="row">
-          <mat-form-field class="use-entire-row">
-            <mat-label>Comments:</mat-label>
-            <textarea
-              matInput
-              maxlength="2000"
-              placeholder="e.g. I didn't expect..."
-              formControlName="thoughts"
-              #thoughts
-            ></textarea>
-            <div class="text-counter">
-              {{ showDetailsForm.get("thoughts").value?.length || 0 }} / 2000
-            </div>
-          </mat-form-field>
-        </div>
-      </form>
 
-      <div class="row">
-        <span class="left-align">
-          <button mat-button (click)="navigateToRoute()">
-            <mat-icon>arrow_back</mat-icon>Back
-          </button>
-        </span>
-        <span class="right-align">
-          <ng-container *ngIf="isUpdate">
-            <button (click)="delete()" mat-button>
-              <mat-icon>delete</mat-icon>Delete
-            </button>
-          </ng-container>
-          <button
-            (click)="save()"
-            [disabled]="showDetailsForm.invalid"
-            [ngClass]="{ 'button-disabled': showDetailsForm.invalid }"
-            mat-button
-          >
-            <mat-icon>save</mat-icon>{{ isUpdate ? "Update" : "Create" }}
-          </button>
-        </span>
+    <div class="row">
+      <div class="form-background">
+        <mat-card-content>
+          <form [formGroup]="showDetailsForm">
+            <div>
+              <mat-form-field>
+                <mat-label>Number of Episodes Watched:</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  id="episodesWatched"
+                  formControlName="episodesWatched"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    showDetailsForm.controls.episodesWatched.errors?.pattern
+                  "
+                >
+                  Episodes Watched must be a non-negative integer.
+                </mat-error>
+                <mat-error
+                  *ngIf="showDetailsForm.controls.episodesWatched.errors?.max"
+                >
+                  Episodes Watched cannot be greater than 10,000.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field *ngIf="displayDateLastWatched">
+                <mat-label>Date Last Watched:</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="dateLastWatched"
+                  [min]="minDate"
+                  [max]="maxDate"
+                />
+                <mat-hint>Please enter as MM/DD/YYYY.</mat-hint>
+                <mat-error
+                  *ngIf="
+                    showDetailsForm.controls.dateLastWatched.errors
+                      ?.dateNotFuture
+                  "
+                >
+                  Date Last Watched cannot be in the future.
+                </mat-error>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Comments:</mat-label>
+                <textarea
+                  matInput
+                  maxlength="2000"
+                  placeholder="e.g. I didn't expect..."
+                  formControlName="thoughts"
+                  #thoughts
+                ></textarea>
+                <div class="text-counter">
+                  {{ showDetailsForm.get("thoughts").value?.length || 0 }} /
+                  2000
+                </div>
+              </mat-form-field>
+            </div>
+          </form>
+
+          <div class="row">
+            <span class="left-align">
+              <button mat-button (click)="navigateToRoute()">
+                <mat-icon>arrow_back</mat-icon>Back
+              </button>
+            </span>
+            <span class="right-align">
+              <ng-container *ngIf="isUpdate">
+                <button (click)="delete()" mat-button>
+                  <mat-icon>delete</mat-icon>Delete
+                </button>
+              </ng-container>
+              <button
+                (click)="save()"
+                [disabled]="showDetailsForm.invalid"
+                [ngClass]="{ 'button-disabled': showDetailsForm.invalid }"
+                mat-button
+              >
+                <mat-icon>save</mat-icon>{{ isUpdate ? "Update" : "Create" }}
+              </button>
+            </span>
+          </div>
+        </mat-card-content>
       </div>
+    </div>
+
+    <div class="row center-text">
       <div>
+        <em>{{ getTextContent(deserializedData.summary) }}</em>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="trump-card-container column">
+        <div class="trump-card" *ngFor="let show of showDetails">
+          <div class="trump-card-header">Details</div>
+          <div class="trump-card-body">
+            <div class="trump-card-item">
+              <div class="trump-card-label">Network:</div>
+              <div class="trump-card-value">
+                {{
+                  show && show.network && show.network.name
+                    ? show.network.name
+                    : "N/A"
+                }}
+              </div>
+            </div>
+            <div class="trump-card-item">
+              <div class="trump-card-label">Premiered:</div>
+              <div class="trump-card-value">
+                {{ show && show.premiered ? show.premiered : "N/A" }}
+              </div>
+            </div>
+            <div class="trump-card-item">
+              <div class="trump-card-label">Language:</div>
+              <div class="trump-card-value">
+                {{ show && show.language ? show.language : "N/A" }}
+              </div>
+            </div>
+            <div class="trump-card-item">
+              <div class="trump-card-label">Status:</div>
+              <div class="trump-card-value">
+                {{ show && show.status ? show.status : "N/A" }}
+              </div>
+            </div>
+            <div class="trump-card-item">
+              <div class="trump-card-label">Ended:</div>
+              <div class="trump-card-value">
+                {{
+                  show && show.status && show.status === "Running"
+                    ? "N/A"
+                    : show.ended
+                }}
+              </div>
+            </div>
+            <div class="trump-card-item">
+              <div class="trump-card-label">Type:</div>
+              <div class="trump-card-value">
+                {{ show && show.type ? show.type : "N/A" }}
+              </div>
+            </div>
+            <div class="trump-card-item">
+              <div class="trump-card-label">Average Runtime (Minutes):</div>
+              <div class="trump-card-value">
+                {{ show && show.type ? show.averageRuntime : "N/A" }}
+              </div>
+            </div>
+            <div class="trump-card-item">
+              <div class="trump-card-label">Genres:</div>
+              <div class="trump-card-value">
+                {{ show && show.genres ? formatGenres(show.genres) : "N/A" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
         <img
           src="{{ deserializedData['image']['original'] }}"
           alt="{{ deserializedData['name'] }} Image"
         />
       </div>
-    </mat-card-content>
+    </div>
   </mat-card>
 </body>
