@@ -25,6 +25,7 @@
 <ul>
   <li>Update form so the full error message displays; currently, it gets cut off.</li>
   <li>Update README with build and deployment instructions.</li>
+  <li>Create automation script to tear down and set up Heroku Dyno and DB.</li>
 </ul>  
 
 
