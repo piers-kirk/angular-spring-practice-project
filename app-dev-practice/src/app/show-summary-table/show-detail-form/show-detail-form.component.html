@@ -22,11 +22,6 @@
     <div id="success-message" *ngIf="showSavedSuccessfully">
       Record successfully saved at {{ clientSaveTime }}
     </div>
-    <div class="error-messages" *ngIf="errors.length > 0">
-      <ul>
-        <li *ngFor="let error of errors">{{ error }}</li>
-      </ul>
-    </div>
 
     <div class="row">
       <div class="form-background">
@@ -47,12 +42,12 @@
                     showDetailsForm.controls.episodesWatched.errors?.pattern
                   "
                 >
-                  Episodes Watched must be a non-negative integer.
+                  Number of Episodes Watched must be a non-negative integer.
                 </mat-error>
                 <mat-error
                   *ngIf="showDetailsForm.controls.episodesWatched.errors?.max"
                 >
-                  Episodes Watched cannot be greater than 10,000.
+                  Number of Episodes Watched cannot be greater than 10,000.
                 </mat-error>
               </mat-form-field>
             </div>
