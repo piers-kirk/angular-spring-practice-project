@@ -181,13 +181,16 @@ export class ShowDetailFormComponent implements OnInit {
       };
       this.showSummaryTableService.save(show).subscribe({
         next: () => {
-          this.isUpdate = true;
-          this.showSavedSuccessfully = true;
-          this.clientSaveTime = new Date();
-          setTimeout(() => {
-            this.showSavedSuccessfully = false;
-            this.cdr.detectChanges();
-          }, 10000);
+          if (!this.isUpdate) {
+            this.router.navigate(['']);
+          } else {
+            this.showSavedSuccessfully = true;
+            this.clientSaveTime = new Date();
+            setTimeout(() => {
+              this.showSavedSuccessfully = false;
+              this.cdr.detectChanges();
+            }, 10000);
+          }
         },
         error: (error: HttpErrorResponse) => {
           this.errors = error.error;
