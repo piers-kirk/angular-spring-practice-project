@@ -28,6 +28,7 @@
   <li>Create automation script to tear down and set up Heroku Dyno and DB.</li>
   <li>Update Broswer URL to not appear as Heroku.</li>
   <li>Add logo to display as part of tab.</li>
+  <li>The app doesn't display the Show Form correctly in Safari.</li>
 </ul>  
 
 
