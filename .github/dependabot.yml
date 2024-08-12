@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Configuration for Maven dependencies (Spring Boot backend)
+  - package-ecosystem: "maven" # For Maven dependencies
+    directory: "/practiceProject" # Location of your Maven POM file
+    schedule:
+      interval: "weekly" # Options: "daily", "weekly", "monthly"
+
+  # Configuration for npm dependencies (Angular frontend)
+  - package-ecosystem: "npm" # For npm dependencies
+    directory: "/app-dev-practice" # Location of your package.json file
+    schedule:
+      interval: "weekly" # Options: "daily", "weekly", "monthly"
