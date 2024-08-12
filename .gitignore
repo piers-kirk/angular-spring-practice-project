@@ -1,43 +1,70 @@
-*#
+# IDE and Editor files
 *.iml
 *.ipr
 *.iws
-*.jar
-*.sw?
-*~
-.#*
-.*.md.html
-.DS_Store
-.attach_pid*
+.project
 .classpath
 .factorypath
-.gradle
-.metadata
-.project
-.recommenders
-.settings
+.settings/
+.metadata/
+.recommenders/
 .springBeans
-.vscode
-/code
-MANIFEST.MF
-_site/
-activemq-data
-bin
-build
-!/**/src/**/bin
-!/**/src/**/build
-build.log
+.vscode/
+.gradle/
+
+# Build and binary files
+*.jar
+bin/
+build/
+out/
+target/
+*.class
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Gradle files
+.gradle/
+.gradle/
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Maven files
 dependency-reduced-pom.xml
+flattened-pom.xml
+MANIFEST.MF
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+
+# Logs and temporary files
+*.log
+build.log
+
+# Environment and configuration files
+*.env
+secrets.yml
 dump.rdb
 interpolated*.xml
-lib/
+
+# Documentation and generated content
+*.md.html
+_site/
+code/
 manifest.yml
-out
+
+# Cache and temporary directories
+.gradletasknamecache/
+.sts4-cache/
+.attach_pid*
+
+# Miscellaneous
 overridedb.*
-target
-.flattened-pom.xml
-secrets.yml
-.gradletasknamecache
-.sts4-cache
+lib/
+activemq-data/
 .git-hooks/
-node_modules
