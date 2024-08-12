@@ -4,7 +4,7 @@
 
   The backend is written in Java 17 with Spring Boot, and I am using the Apache POI library to create the Show Export functionality. I developed the frontend using Angular.
   
-  For my development environment, I am using Docker to host a Microsoft SQL Server instance. I deployed the application on Heroku using the Heroku Postgre Add On for my Production Database. If you try to load the application and it doesn’t work, it’s likely that I’ve taken it down to avoid the monthly Resource fees. Please contact me, and I’ll be happy to redeploy it.
+  For my development environment, I am using Docker to host a Microsoft SQL Server instance. I deployed the application on Heroku using the Heroku Postgres Add On for my Production Database. If you try to load the application and it doesn’t work, it’s likely that I’ve taken it down to avoid the monthly Resource fees. Please contact me, and I’ll be happy to redeploy it.
   
   Thank you for taking the time to check out my application! I have several enhancements planned for this project, primarily focusing on backend tasks such as adding authentication and authorization with Spring Security.
   
