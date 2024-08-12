@@ -2,7 +2,7 @@
 <p>
   I developed this application to enhance my understanding of the frameworks I would be using in my role as a Software Engineer at QSMI.
 
-  The backend is written in Java 8 with Spring Boot, and I am using the Apache POI library to create the Show Export functionality. The frontend is developed using Angular.
+  The backend is written in Java 17 with Spring Boot, and I am using the Apache POI library to create the Show Export functionality. The frontend is developed using Angular.
   
   I am using Docker to host a Microsoft SQL Server instance as part of the development environment. I deployed the application on Heroku and am using PostgreSQL in production.
   
