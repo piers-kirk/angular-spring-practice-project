@@ -1,33 +1,50 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
+# Maven build directory
+/target/
+
+# Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Exclude build directories except for specific cases
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# Spring Tool Suite (STS) specific
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
-.sts4-cache
+.sts4-cache/
 
-### IntelliJ IDEA ###
-.idea
+# IntelliJ IDEA specific
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# NetBeans specific
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+/build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+# Visual Studio Code specific
 .vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Operating System specific files
+.DS_Store
+Thumbs.db
+
+# Environment-specific files (if any)
+*.env
+
