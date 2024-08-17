@@ -24,11 +24,13 @@
 <h3>Future Tasks:</h3>
 <ul>
   <li>Update Show Form so the full error message displays; currently, it gets cut off.</li>
+  <li>Debug why the app doesn't display the Show Form correctly in Safari.</li>
+  <li>Using Spring Security, add authentication and authorization.</li>
+  <li>Update validation to include a content moderation API to prevent potentially harmful content.</li>
   <li>Update README with build and deployment instructions.</li>
   <li>Create automation script to tear down and set up Heroku Dyno and DB.</li>
   <li>Update Broswer URL to not appear as Heroku.</li>
   <li>Add logo to display as part of tab.</li>
-  <li>Debug why the app doesn't display the Show Form correctly in Safari.</li>
 </ul>  
 
 
