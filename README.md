@@ -14,11 +14,15 @@
 <h3>Application Screenshots:</h3>
 <p>
   <i>Image 1: The application entry point is the Show Summary Table, which displays all the recorded shows along with additional show data.</i>
-  <img width="1512" alt="Show Summary Table" src="https://github.com/user-attachments/assets/5b85800b-0727-4339-9569-9272ee0afb82">
+  <img width="1512" alt="summary-table" src="https://github.com/user-attachments/assets/2d5ed308-0400-465d-bce1-ed1bae0237d0">
 </p>
 <p>
   <i>Image 2: The Show Detail Form, where users can add and update information about their selected shows.</i>
-  <img width="1512" alt="Show Detail Form" src="https://github.com/user-attachments/assets/ab23990a-23f6-4b67-88cf-e839cc2cf57d">
+  <img width="1512" alt="show-form" src="https://github.com/user-attachments/assets/c0f0cfc3-3720-434c-ab40-27343f4323c1">
+</p>
+<p>
+  <i>Image 3: If no records have been saved, then the user will see the below prompt.</i>
+  <img width="1512" alt="no-records" src="https://github.com/user-attachments/assets/65982d18-80e3-4052-85c6-134767239d58">
 </p>
 
 <h3>Future Tasks:</h3>
